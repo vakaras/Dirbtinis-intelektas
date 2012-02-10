@@ -1,0 +1,33 @@
+\chapter{Tiesioginis išvedimas}
+
+\begin{python}
+print('Sveikas pasauli!')
+\end{python}
+
+\pythonai{echo}{%
+# Taisyklės:
+}
+
+\pythonai{source}{forwardchaining.Rule}
+
+\begin{pythonaienv}[fc]
+# Taisyklės:
+FB Z
+CD F
+AD
+A L
+L K
+B A
+D M
+# Faktai:
+ABC
+# Tikslas:
+Z
+\end{pythonaienv}
+
+\begin{dot2tex}[neato,mathmode]
+  digraph G {
+    node [shape="circle"];
+    a_1 -> a_2 -> a_3 -> a_4 -> a_1;
+    }
+\end{dot2tex}
