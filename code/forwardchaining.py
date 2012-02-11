@@ -5,18 +5,18 @@ class Rule:
     """ Išvedimo taisyklė.
     """
 
-    def __init__(self, result, data, index=None):
+    def __init__(self, result, premises, index=None):
         self.result = result
-        self.data = set(data)
+        self.premises = set(premises)
         self.index = index
 
     def __str__(self):
         if self.index is None:
             return utils.math('{0} \\to {1}'.format(
-                ','.join(self.data), self.result))
+                ','.join(self.premises), self.result))
         else:
             return utils.math('{2}: {0} \\to {1}'.format(
-                ','.join(self.data), self.result, self.index))
+                ','.join(self.premises), self.result, self.index))
 
     @classmethod
     def from_string(self, string):
@@ -121,35 +121,35 @@ class ForwardChaining:
         for rule in self.solution:
             add_rule(rule)
             add_fact(rule.result)
-            for fact in rule.data:
+            for fact in rule.premises:
                 env.append('{0} -> {1};\n', fact, rule.index)
             env.append('{0} -> {1};\n', rule.index, rule.result)
         env.append('}\n')
         self.file.write('\nSemantinis grafas:\n')
         self.file.write(str(env))
 
-    def drop_improper(self, rules, facts):
+    def drop_improper(self, rules, premises):
         """ Išmeta taisykles, kurių rezultatas jau yra tarp faktų.
         """
         drop = []
         for i, rule in enumerate(rules):
-            if rule.result in facts:
+            if rule.result in premises:
                 drop.append(i)
         for index in reversed(drop):
             del rules[index]
 
-    def recursion(self, rules, facts, goal):
+    def recursion(self, rules, premises, goal):
         """ Sprendžia rekursyviai.
         """
-        if goal in facts:
+        if goal in premises:
             return True
-        self.drop_improper(rules, facts)
+        self.drop_improper(rules, premises)
         for i, rule in enumerate(rules):
-            if rule.data.issubset(facts):
-                facts.add(rule.result)
+            if rule.premises.issubset(premises):
+                premises.add(rule.result)
                 self.solution.append(rule)
                 del rules[i]
-                return self.recursion(rules, facts, goal)
+                return self.recursion(rules, premises, goal)
         return False
 
     def solve(self):

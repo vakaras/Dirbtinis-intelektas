@@ -4,16 +4,16 @@
 
 \begin{program}
   \rcomment{$R$ – nepanaudotų taisyklių aibė.}
-  \rcomment{$F$ – faktų (pradinių ir išvestų) aibė.}
+  \rcomment{$P$ – prielaidų aibė.}
   \rcomment{$G$ – ieškomas tikslas.}
-  \FUNCT |ieškok_rekursyviai|(R, F, G) \BODY
-    \IF G \in F \THEN \EXIT(\true) \FI
+  \FUNCT |ieškok_rekursyviai|(R, P, G) \BODY
+    \IF G \in P \THEN \EXIT(\true) \FI
     \COMMENT{Iš $R$ pašalinam visas taisykles, %
-             kurių rezultatas jau yra $F$.}
+             kurių rezultatas jau yra $P$.}
     \FOREACH r \in R \DO
-      \IF r.|prielaidos| \subseteq F
+      \IF r.|prielaidos| \subseteq P
       \THEN \EXIT(|ieškok_rekursyviai|%
-        (R \setminus \{r\}, F \cup \{r.|rezultatas|\}, G ))
+        (R \setminus \{r\}, P \cup \{r.|rezultatas|\}, G ))
       \FI
     \OD
     \EXIT(\false)%
