@@ -125,7 +125,7 @@ class ForwardChaining:
                 env.append('{0} -> {1};\n', fact, rule.index)
             env.append('{0} -> {1};\n', rule.index, rule.result)
         env.append('}\n')
-        self.file.write('\nPaieškos grafas:\n')
+        self.file.write('\nSemantinis grafas:\n')
         self.file.write(str(env))
 
     def drop_improper(self, rules, facts):
