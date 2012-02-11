@@ -1,18 +1,4 @@
-def math(string):
-    """ Returns string converted into math mode.
-    """
-    return '${0}$'.format(string)
-
-
-def uncomment(string):
-    """ Removes comment.
-    """
-    string = ''.join(string.split())
-    comment = string.find('#')
-    if comment == -1:
-        return string
-    else:
-        return string[:comment]
+import utils
 
 
 class Rule:
@@ -26,17 +12,17 @@ class Rule:
 
     def __str__(self):
         if self.index is None:
-            return math('{0} \\to {1}'.format(
+            return utils.math('{0} \\to {1}'.format(
                 ','.join(self.data), self.result))
         else:
-            return math('{2}: {0} \\to {1}'.format(
+            return utils.math('{2}: {0} \\to {1}'.format(
                 ','.join(self.data), self.result, self.index))
 
     @classmethod
     def from_string(self, string):
         """ Sukuria taisyklės objektą iš simbolių eilutės.
         """
-        string = uncomment(string)
+        string = utils.uncomment(string)
         if len(string) < 2:
             return None
         else:
@@ -66,19 +52,19 @@ class ProductionSystem:
                     break
             else:
                 rules.append(rule)
-                rule.index = 'R{0}'.format(len(rules))
+                rule.index = 'R_{0}'.format(len(rules))
         else:
             raise Exception('Nepavyko nuskaityti duomenų: failo pabaiga.')
 
         for line in lines:
-            facts = uncomment(line)
+            facts = utils.uncomment(line)
             if facts:
                 break
         else:
             raise Exception('Nepavyko nuskaityti duomenų: failo pabaiga.')
 
         for line in lines:
-            goal = uncomment(line)
+            goal = utils.uncomment(line)
             if goal:
                 if len(goal) == 1:
                     break
@@ -115,6 +101,33 @@ class ForwardChaining:
         self.file.write(str(self.production_system))
         self.file.write('\n')
 
+    def print_graph(self):
+        """ Į rezultatų failą išveda gautą grafą.
+        """
+        env = utils.Environment('dot2tex', ('mathmode', True))
+        env.append('digraph G {\n')
+        rules = set()
+        facts = set()
+        def add_rule(rule):
+            if rule.index not in rules:
+                env.append('node [shape="circle"]; {0};\n', rule.index)
+                rules.add(rule.index)
+        def add_fact(fact):
+            if fact not in facts:
+                env.append('node [shape="box"]; {0};\n', fact)
+                facts.add(fact)
+        for fact in self.production_system.facts:
+            add_fact(fact)
+        for rule in self.solution:
+            add_rule(rule)
+            add_fact(rule.result)
+            for fact in rule.data:
+                env.append('{0} -> {1};\n', fact, rule.index)
+            env.append('{0} -> {1};\n', rule.index, rule.result)
+        env.append('}\n')
+        self.file.write('\nPaieškos grafas:\n')
+        self.file.write(str(env))
+
     def drop_improper(self, rules, facts):
         """ Išmeta taisykles, kurių rezultatas jau yra tarp faktų.
         """
@@ -144,16 +157,16 @@ class ForwardChaining:
         """
 
         if self.recursion(
-                self.production_system.rules,
-                self.production_system.facts,
+                self.production_system.rules[:],
+                self.production_system.facts.copy(),
                 self.production_system.goal,):
             self.file.write('\nAtsakymas: ')
             if self.solution:
-                self.file.write(math(
+                self.file.write(utils.math(
                     ', '.join(rule.index for rule in self.solution)
                     ))
             else:
-                self.file.write(math('\\emptyset'))
+                self.file.write(utils.math('\\emptyset'))
         else:
             self.file.write('\nIšvedimas neegzistuoja.')
         self.file.write('\n')

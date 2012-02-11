@@ -1,20 +1,19 @@
 \chapter{Tiesioginis išvedimas}
 
-\begin{python}
-print('Sveikas pasauli!')
-\end{python}
+\section{Programos kodas}
 
-\pythonai{echo}{%
-# Taisyklės:
-}
+\pythonai{source}{forwardchaining.ForwardChaining.solve}
+\pythonai{source}{forwardchaining.ForwardChaining.recursion}
 
-\pythonai{source}{forwardchaining.Rule}
+\section{Pavyzdžiai}
+
+\subsection{Pirmas pavyzdys}
 
 \begin{pythonaienv}[fc]
 # Taisyklės:
 FB Z
 CD F
-AD
+A D
 A L
 L K
 B A
@@ -25,9 +24,35 @@ ABC
 Z
 \end{pythonaienv}
 
-\begin{dot2tex}[neato,mathmode]
-  digraph G {
-    node [shape="circle"];
-    a_1 -> a_2 -> a_3 -> a_4 -> a_1;
-    }
-\end{dot2tex}
+\subsection{Antras pavyzdys}
+
+\begin{pythonaienv}[fc]
+# Taisyklės:
+G Z
+A G
+A B
+B C
+C D
+D Z
+# Faktai:
+A
+# Tikslas:
+Z
+\end{pythonaienv}
+
+\subsection{Trečias pavyzdys}
+
+\begin{pythonaienv}[fc]
+# Taisyklės:
+CD F
+A D
+A L
+L K
+B A
+D M
+FB Z
+# Faktai:
+ABC
+# Tikslas:
+Z
+\end{pythonaienv}
