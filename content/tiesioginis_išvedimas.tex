@@ -1,5 +1,25 @@
 \chapter{Tiesioginis išvedimas}
 
+\section{Pseudo kodas}
+
+\begin{program}
+  \rcomment{$R$ – nepanaudotų taisyklių aibė.}
+  \rcomment{$F$ – faktų (pradinių ir išvestų) aibė.}
+  \rcomment{$G$ – ieškomas tikslas.}
+  \FUNCT |ieškok_rekursyviai|(R, F, G) \BODY
+    \IF G \in F \THEN \EXIT(\true) \FI
+    \COMMENT{Iš $R$ pašalinam visas taisykles, %
+             kurių rezultatas jau yra $F$.}
+    \FOREACH r \in R \DO
+      \IF r.|prielaidos| \subseteq F
+      \THEN \EXIT(|ieškok_rekursyviai|%
+        (R \setminus \{r\}, F \cup \{r.|rezultatas|\}, G ))
+      \FI
+    \OD
+    \EXIT(\false)%
+  \ENDFUNCT
+\end{program}
+
 \section{Programos kodas}
 
 \pythonai{source}{forwardchaining.ForwardChaining.solve}
