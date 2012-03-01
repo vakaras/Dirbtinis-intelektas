@@ -2,15 +2,17 @@
 
 \section{Pseudo kodas}
 
+\begin{description}
+  \item[$R$] – nepanaudotų taisyklių aibė.
+  \item[$P$] – prielaidų aibė.
+  \item[$G$] – ieškomas tikslas.
+\end{description}
 \begin{program}
-  \rcomment{$R$ – nepanaudotų taisyklių aibė.}
-  \rcomment{$P$ – prielaidų aibė.}
-  \rcomment{$G$ – ieškomas tikslas.}
   \FUNCT |ieškok_rekursyviai|(R, P, G) \BODY
     \IF G \in P \THEN \EXIT(\true) \FI
     \COMMENT{Iš $R$ pašalinam visas taisykles, %
              kurių rezultatas jau yra $P$.}
-    \FOREACH r \in R \DO
+    \FOREACH r \in R \; \DO
       \IF r.|prielaidos| \subseteq P
       \THEN \EXIT(|ieškok_rekursyviai|%
         (R \setminus \{r\}, P \cup \{r.|rezultatas|\}, G ))
