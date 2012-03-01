@@ -101,7 +101,7 @@ class ForwardChaining:
         self.file.write(str(self.production_system))
         self.file.write('\n')
 
-    def print_graph(self):
+    def print_graph(self, title='Semantinis grafas'):
         """ Į rezultatų failą išveda gautą grafą.
         """
         env = utils.Environment('dot2tex', ('mathmode', True))
@@ -125,7 +125,7 @@ class ForwardChaining:
                 env.append('{0} -> {1};\n', fact, rule.index)
             env.append('{0} -> {1};\n', rule.index, rule.result)
         env.append('}\n')
-        self.file.write('\nSemantinis grafas:\n')
+        self.file.write('\n\n{0}:\n'.format(title))
         self.file.write(str(env))
 
     def drop_improper(self, rules, premises):
@@ -141,6 +141,8 @@ class ForwardChaining:
     def recursion(self, rules, premises, goal):
         """ Sprendžia rekursyviai.
         """
+        self.print_graph(
+                'Grafas po {0} iteracijų'.format(len(self.solution)))
         if goal in premises:
             return True
         self.drop_improper(rules, premises)
@@ -160,7 +162,7 @@ class ForwardChaining:
                 self.production_system.rules[:],
                 self.production_system.facts.copy(),
                 self.production_system.goal,):
-            self.file.write('\nAtsakymas: ')
+            self.file.write('\n\nAtsakymas: ')
             if self.solution:
                 self.file.write(utils.math(
                     ', '.join(rule.index for rule in self.solution)
@@ -168,5 +170,5 @@ class ForwardChaining:
             else:
                 self.file.write(utils.math('\\emptyset'))
         else:
-            self.file.write('\nIšvedimas neegzistuoja.')
+            self.file.write('\n\nIšvedimas neegzistuoja.')
         self.file.write('\n')
