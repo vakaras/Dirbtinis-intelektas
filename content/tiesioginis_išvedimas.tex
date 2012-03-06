@@ -33,13 +33,13 @@
 
 \begin{pythonaienv}[fc]
 # Taisyklės:
-FB Z
-CD F
-A D
-A L
-L K
-B A
-D M
+FB Z                                    # R1: F, B → Z
+CD F                                    # R2: C, D → F
+A D                                     # R3: A → D
+A L                                     # R4: A → L
+L K                                     # R5: L → K
+B A                                     # R6: B → A
+D M                                     # R7: D → M
 # Faktai:
 ABC
 # Tikslas:
@@ -50,12 +50,12 @@ Z
 
 \begin{pythonaienv}[fc]
 # Taisyklės:
-G Z
-A G
-A B
-B C
-C D
-D Z
+G Z                                     # R1: G → Z
+A G                                     # R2: A → G
+A B                                     # R3: A → B
+B C                                     # R4: B → C
+C D                                     # R5: C → D
+D Z                                     # R6: D → Z
 # Faktai:
 A
 # Tikslas:
@@ -66,13 +66,13 @@ Z
 
 \begin{pythonaienv}[fc]
 # Taisyklės:
-CD F
-A D
-A L
-L K
-B A
-D M
-FB Z
+CD F                                    # R1: C, D → F
+A D                                     # R2: A → D
+A L                                     # R3: A → L
+L K                                     # R4: L → K
+B A                                     # R5: B → A
+D M                                     # R6: D → M
+FB Z                                    # R7: F, B → Z
 # Faktai:
 ABC
 # Tikslas:
@@ -83,13 +83,13 @@ Z
 
 \begin{pythonaienv}[fc]
 # Taisyklės:
-CD F
-A D
-A L
-L K
-B A
-D M
-FB Z
+CD F                                    # R1: C, D → F
+A D                                     # R2: A → D
+A L                                     # R3: A → L
+L K                                     # R4: L → K
+B A                                     # R5: B → A
+D M                                     # R6: D → M
+FB Z                                    # R7: F, B → Z
 # Faktai:
 ABC
 # Tikslas:
@@ -100,15 +100,36 @@ H
 
 \begin{pythonaienv}[fc]
 # Taisyklės:
-CD F
-A D
-A L
-L K
-B A
-D M
-FB Z
+CD F                                    # R1: C, D → F
+A D                                     # R2: A → D
+A L                                     # R3: A → L
+L K                                     # R4: L → K
+B A                                     # R5: B → A
+D M                                     # R6: D → M
+FB Z                                    # R7: F, B → Z
 # Faktai:
 ABC
 # Tikslas:
 B
+\end{pythonaienv}
+
+\subsection{Šeštas pavyzdys}
+
+\begin{pythonaienv}[fc]
+
+# Taisyklės:
+A L                                     # R1: A → L
+L K                                     # R2: L → K
+D A                                     # R3: D → A
+D M                                     # R4: D → M
+EFB Z                                   # R5: E, F, B → Z
+ECD F                                   # R6: E, C, D → F
+EA D                                    # R7: E, A → D
+
+# Faktai:
+A B C E
+
+# Tikslas:
+Z
+
 \end{pythonaienv}
