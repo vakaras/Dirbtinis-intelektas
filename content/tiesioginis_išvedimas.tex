@@ -4,25 +4,30 @@
 
 \begin{description}
   \item[$R$] – nepanaudotų taisyklių aibė.
-  \item[$P$] – prielaidų aibė.
+  \item[$F$] – pradinių faktų aibė.
   \item[$G$] – ieškomas tikslas.
+  \item[$Q$] – panaudotų taisyklių seka.
 \end{description}
-\begin{program}
-  \FUNCT |ieškok_rekursyviai|(R, P, G) \BODY
-    \IF G \in P \THEN \EXIT(\true) \FI
-    \COMMENT{Iš $R$ pašalinam visas taisykles, %
-             kurių rezultatas jau yra $P$.}
-    \FOREACH r \in R \; \DO
-      \IF r.|prielaidos| \subseteq P
-      \THEN \EXIT(|ieškok_rekursyviai|%
-        (R \setminus \{r\}, P \cup \{r.|rezultatas|\}, G ))
-      \FI
-    \OD
-    \EXIT(\false)%
-  \ENDFUNCT
-\end{program}
+\begin{algorithmic}[1]
+  \Function{tiesioginis išvedimas}{$R, F, G$}
+    \State $Q := \left(  \right)$
+    \State $R :=$ pirma iš taisyklių;
+    \While{yra pritaikomų taisyklių $\land G \not\in F$}
+      \If{$R$ prielaidos yra tarp $F \land R$ išvados nėra tarp $F$}
+        \State $R$ išvadą pridedame į $F$;
+        \State $R := $ pirma iš taisyklių;
+        \State $R$ pridedame į $Q$ galą;
+      \Else
+        \State $R := $ kita taisyklė;
+      \EndIf
+    \EndWhile
+    \State \Return Q;
+  \EndFunction
+\end{algorithmic}
 
-\section{Programos kodas}
+\section{Realizacija}
+
+
 
 \pythonai{source}{forwardchaining.ForwardChaining.solve}
 \pythonai{source}{forwardchaining.ForwardChaining.recursion}
