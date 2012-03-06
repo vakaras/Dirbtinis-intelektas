@@ -1,5 +1,29 @@
 \chapter{Tiesioginis išvedimas}
 
+\section{Įvadas}
+
+Tiesioginis išvedimas yra vienas iš dviejų pagrindinių išvedimo metodų,
+naudojamų su produkcijos taisyklėmis, ir logikoje gali būti
+apibrėžtas, kaip pakartotinas \emph{modus ponens} taisyklės
+taikymas.
+
+Tiesioginio išvedimo uždavinį galime apibrėžti, kaip trejetą
+$<R, F, G>$, kur
+\begin{description}
+  \item[$R$] – taisyklių aibė;
+  \item[$F$] – pradinių faktų aibė;
+  \item[$G$] – ieškomas tikslas (faktas, kurį norime įrodyti).
+\end{description}
+Taisyklių aibei bendruoju atveju priklauso $n$ taisyklių, pavidalo:
+$Ri: A \to B$, kur $A$ yra faktų aibė, o $B$ – pagal taisyklę
+$Ri$ iš faktų $A$ išvedamas faktas.
+
+Tiesioginio išvedimo sistema bando išvesti ieškomąjį faktą $G$
+tikrindama visas taisykles ir iš jų pritaikydama tas, kurių
+prielaidos yra tarp jau išvestų faktų ir kurias panaudojant išvedamų
+faktų dar nėra tarp rezultatų, tol kol yra gaunamas ieškomas tikslas
+arba nebėra taisyklių, kurias galima būtų pritaikyti.
+
 \section{Pseudo kodas}
 
 \begin{description}
