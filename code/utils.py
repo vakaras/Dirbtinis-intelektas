@@ -38,3 +38,17 @@ class Environment:
             self.content.append(frmt.format(*args, **kwargs))
         else:
             self.content.append(frmt)
+
+
+class EnumerateEnvironment(Environment):
+    """ Helper for writing LaTeX enumerate.
+    """
+
+    def __init__(self):
+        super(EnumerateEnvironment, self).__init__('enumerate')
+
+    def append(self, frmt, *args, **kwargs):
+        """ Appends string to content.
+        """
+        super(EnumerateEnvironment, self).append(
+                '\n\n\\item ' + frmt, *args, **kwargs)

@@ -128,36 +128,34 @@ class ForwardChaining:
         self.file.write('\n\n{0}:\n'.format(title))
         self.file.write(str(env))
 
-    def drop_improper(self, rules, premises):
-        """ Išmeta taisykles, kurių rezultatas jau yra tarp faktų.
-        """
-        drop = []
-        for i, rule in enumerate(rules):
-            if rule.result in premises:
-                drop.append(i)
-        for index in reversed(drop):
-            del rules[index]
-
-    def recursion(self, rules, premises, goal):
+    def recursion(self, rules, facts, goal):
         """ Sprendžia rekursyviai.
         """
-        self.print_graph(
-                'Grafas po {0} iteracijų'.format(len(self.solution)))
-        if goal in premises:
+        if goal in facts:               # 4
+            self.trace.append('Rąstas tikslas.')
             return True
-        self.drop_improper(rules, premises)
         for i, rule in enumerate(rules):
-            if rule.premises.issubset(premises):
-                premises.add(rule.result)
+                                        # 4, 10
+            if (rule.premises.issubset(facts) and
+                    rule.result not in facts):
+                                        # 5
+                facts.add(rule.result)  # 6
+                self.trace.append(
+                        'Pritaikome taisyklę: {0}. '
+                        'Faktų aibė po pritaikymo: $\\{{{1}\\}}$.',
+                        rule, ', '.join(facts))
                 self.solution.append(rule)
+                                        # 8
                 del rules[i]
-                return self.recursion(rules, premises, goal)
+                return self.recursion(rules, facts, goal)
+                                        # 7
         return False
 
     def solve(self):
         """ Bando surasti tikslą naudodama tiesioginį išvedimą.
         """
 
+        self.trace = utils.EnumerateEnvironment()
         if self.recursion(
                 self.production_system.rules[:],
                 self.production_system.facts.copy(),
@@ -171,4 +169,5 @@ class ForwardChaining:
                 self.file.write(utils.math('\\emptyset'))
         else:
             self.file.write('\n\nIšvedimas neegzistuoja.')
-        self.file.write('\n')
+        self.file.write('\n\nAtliktų veiksmų seka:')
+        self.file.write(str(self.trace))
