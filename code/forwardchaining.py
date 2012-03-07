@@ -52,7 +52,7 @@ class ProductionSystem:
                     break
             else:
                 rules.append(rule)
-                rule.index = 'R_{0}'.format(len(rules))
+                rule.index = 'R{0}'.format(len(rules))
         else:
             raise Exception('Nepavyko nuskaityti duomenų: failo pabaiga.')
 
