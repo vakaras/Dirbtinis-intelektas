@@ -58,6 +58,8 @@ arba nebėra taisyklių, kurias galima būtų pritaikyti.
 
 \section{Pseudo kodas}
 
+\label{sec:fc:pseudo}
+
 \begin{description}
   \item[$R$] – nepanaudotų taisyklių aibė.
   \item[$F$] – pradinių faktų aibė.
@@ -83,9 +85,33 @@ arba nebėra taisyklių, kurias galima būtų pritaikyti.
 
 \section{Realizacija}
 
+Tiesioginio išvedimo sistema parašyta naudojant Python programavimo
+kalbą. Sistema susideda iš trijų modulių:
+\begin{itemize}
+  \item \verb|utils| – pagalbinės funkcijos ir klasės;
+  \item \verb|forwardchaining| – modulis, kuriame realizuotas
+    tiesioginio išvedimo funkcionalumas;
+  \item \verb|main| – vykdomasis modulis.
+\end{itemize}
 
+\begin{sloppypar}
+Visi duomenys (produkcijų sistema) yra saugomi klasėje
+\verb|ProductionSystem|. Klasės \verb|ForwardChaining| tipo objektas
+gauna rezultatą (taisykles, kurias reikia pritaikyti norint pasiekti
+tikslą) manipuliuodamas susikurtu \verb|ProductionSystem| objektu.
+Visus duomenis sistema išveda \LaTeX transliatoriui suprantamu formatu:
+dėl to visi šiame dokumente pateikti pavyzdžiai iš tiesų yra
+sistemos sugeneruota išvestis. Konkrečius programai pateiktus duomenis
+galima pamatyti atsidarius šio dokumento išeities tekstą. (Buvo
+nuspręsta jų dokumente nerodyti, nes sistema darbo pradžioje išveda
+gautus duomenis – tai yra, informacija būtų dubliuojama.)
+\end{sloppypar}
 
-\pythonai{source}{forwardchaining.ForwardChaining.solve}
+Tiesioginio išvedimo algoritmas, pateiktas \nameref{sec:fc:pseudo}
+skyrelyje, siekiant išvengti netinkamo programavimo stiliaus Python
+kalba, buvo realizuotas \emph{while} ir \emph{kita taisyklė}
+konstrukcijas pakeičiant į rekursiją bei iteratorių:
+
 \pythonai{source}{forwardchaining.ForwardChaining.recursion}
 
 \section{Pavyzdžiai}
