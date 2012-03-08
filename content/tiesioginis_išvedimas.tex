@@ -1,37 +1,5 @@
 \chapter{Tiesioginis išvedimas}
 
-\section{TODO}
-
-
-TODO: Žr. naujausią darbą, kaip pavyzdį.
-
-Padaryti, kad grafai užimtų mažiau vietos. Tarpinius grafus pakeisti
-į tekstą.
-
-Rekursijos negali būti pseudo kode. Reikia pridėti paaiškinią, kodėl
-Python realizacija yra padaryta panaudojant rekursiją.
-
-Tiesioginis išvedimas: iki kovo pabaigos.
-Atbulinis išvedimas: iki balandžio pabaigos.
-
-Aprašyti uždavinį.
-
-Prie pseudo kodo nurodyti, kas yra input, kas yra output.
-Input:
-
-1)  Produkcijų aibė. RULES
-2)  Faktai. FACTS
-3)  Tikslas. GOAL
-
-Output: Produkcijų seka. RESULT
-
-Sunumeruoti pseudo kodo eilutes ir realaus kodo komentaruose
-nurodyti atitinkamas eilutes.
-
-Aprašyti programos „modulius“ ir jų struktūrą. Aprašyti detaliai
-programą, kaip jai paduoti duomenis ir t.t.
-Aprašyti kaip laikomi duomenų struktūra.
-
 \section{Įvadas}
 
 Tiesioginis išvedimas yra vienas iš dviejų pagrindinių išvedimo metodų,
@@ -61,7 +29,7 @@ arba nebėra taisyklių, kurias galima būtų pritaikyti.
 \label{sec:fc:pseudo}
 
 \begin{description}
-  \item[$R$] – nepanaudotų taisyklių aibė.
+  \item[$R$] – taisyklių aibė.
   \item[$F$] – pradinių faktų aibė.
   \item[$G$] – ieškomas tikslas.
   \item[$Q$] – panaudotų taisyklių seka.
@@ -106,13 +74,13 @@ gauna rezultatą (taisykles, kurias reikia pritaikyti norint pasiekti
 tikslą) manipuliuodamas susikurtu \verb|ProductionSystem| objektu.
 Visus duomenis sistema išveda \LaTeX transliatoriui suprantamu formatu:
 dėl to visi šiame dokumente pateikti pavyzdžiai iš tiesų yra
-sistemos sugeneruota išvestis. Konkrečius programai pateiktus duomenis
+sistemos išvestis. Konkrečius programai pateiktus duomenis
 galima pamatyti atsidarius šio dokumento išeities tekstą. (Buvo
 nuspręsta jų dokumente nerodyti, nes sistema darbo pradžioje išveda
 gautus duomenis – tai yra, informacija būtų dubliuojama.)
 \end{sloppypar}
 
-Tiesioginio išvedimo algoritmas, pateiktas \nameref{sec:fc:pseudo}
+Tiesioginio išvedimo algoritmas, pateiktas \ref{sec:fc:pseudo}
 skyrelyje, siekiant išvengti netinkamo programavimo stiliaus Python
 kalba, buvo realizuotas \emph{while} ir \emph{kita taisyklė}
 konstrukcijas pakeičiant į rekursiją bei iteratorių:
