@@ -71,12 +71,17 @@ arba nebėra taisyklių, kurias galima būtų pritaikyti.
     \State $Q := \left(  \right)$
     \State $R :=$ pirma iš taisyklių;
     \While{yra pritaikomų taisyklių $\land G \not\in F$}
+                                        \label{fc:pseudo:while_condition}
       \If{$R$ prielaidos yra tarp $F \land R$ išvados nėra tarp $F$}
+                                        \label{fc:pseudo:if_condition}
         \State $R$ išvadą pridedame į $F$;
+                                        \label{fc:pseudo:add_fact}
         \State $R := $ pirma iš taisyklių;
+                                        \label{fc:pseudo:start}
         \State $R$ pridedame į $Q$ galą;
+                                        \label{fc:pseudo:add_rule}
       \Else
-        \State $R := $ kita taisyklė;
+        \State $R := $ kita taisyklė;   \label{fc:pseudo:next_rule}
       \EndIf
     \EndWhile
     \State \Return Q;

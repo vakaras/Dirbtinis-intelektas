@@ -35,7 +35,7 @@ def show_source(input_file, output_file):
     """ Shows information about object defined in input file.
     """
     expression = open(input_file).read().strip()
-    env = utils.Environment('minted', ('python', False))
+    env = utils.Environment('minted', ('linenos,texcl', True), ('python', False))
     env.append(inspect.getsource(eval(expression)))
     with open(output_file, 'w') as fout:
         fout.write(str(env))

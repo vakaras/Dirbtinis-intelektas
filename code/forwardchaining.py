@@ -131,24 +131,25 @@ class ForwardChaining:
     def recursion(self, rules, facts, goal):
         """ Sprendžia rekursyviai.
         """
-        if goal in facts:               # 4
+        if goal in facts:               # \ref{fc:pseudo:while_condition}
             self.trace.append('Rąstas tikslas.')
             return True
         for i, rule in enumerate(rules):
-                                        # 4, 10
+                                        # \ref{fc:pseudo:while_condition}
+                                        # \ref{fc:pseudo:next_rule}
             if (rule.premises.issubset(facts) and
                     rule.result not in facts):
-                                        # 5
-                facts.add(rule.result)  # 6
+                                        # \ref{fc:pseudo:if_condition}
+                facts.add(rule.result)  # \ref{fc:pseudo:add_fact}
                 self.trace.append(
                         'Pritaikome taisyklę: {0}. '
                         'Faktų aibė po pritaikymo: $\\{{{1}\\}}$.',
                         rule, ', '.join(facts))
                 self.solution.append(rule)
-                                        # 8
+                                        # \ref{fc:pseudo:add_rule}
                 del rules[i]
                 return self.recursion(rules, facts, goal)
-                                        # 7
+                                        # \ref{fc:pseudo:start}
         return False
 
     def solve(self):
