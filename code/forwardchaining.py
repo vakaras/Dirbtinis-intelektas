@@ -104,7 +104,7 @@ class ForwardChaining:
     def print_graph(self, title='Semantinis grafas'):
         """ Į rezultatų failą išveda gautą grafą.
         """
-        env = utils.Environment('dot2tex', ('mathmode', True))
+        env = utils.Environment('dot2tex', ('mathmode,fdp', True))
         env.append('digraph G {\n')
         rules = set()
         facts = set()
