@@ -44,14 +44,14 @@ class ProductionSystem:
         """
         lines = iter(file)
 
-        rules = []
+        rules = set()
         for line in lines:
             rule = Rule.from_string(line)
             if rule is None:
                 if rules:
                     break
             else:
-                rules.append(rule)
+                rules.add(rule)
                 rule.index = 'R{0}'.format(len(rules))
         else:
             raise Exception('Nepavyko nuskaityti duomenų: failo pabaiga.')
@@ -134,7 +134,7 @@ class ForwardChaining:
         if goal in facts:               # \ref{fc:pseudo:while_condition}
             self.trace.append('Rąstas tikslas.')
             return True
-        for i, rule in enumerate(rules):
+        for rule in rules:
                                         # \ref{fc:pseudo:while_condition}
                                         # \ref{fc:pseudo:next_rule}
             if (rule.premises.issubset(facts) and
@@ -147,8 +147,7 @@ class ForwardChaining:
                         rule, ', '.join(facts))
                 self.solution.append(rule)
                                         # \ref{fc:pseudo:add_rule}
-                del rules[i]
-                return self.recursion(rules, facts, goal)
+                return self.recursion(rules - {rule}, facts, goal)
                                         # \ref{fc:pseudo:start}
         return False
 
@@ -158,7 +157,7 @@ class ForwardChaining:
 
         self.trace = utils.EnumerateEnvironment()
         if self.recursion(
-                self.production_system.rules[:],
+                self.production_system.rules,
                 self.production_system.facts.copy(),
                 self.production_system.goal,):
             self.file.write('\n\nAtsakymas: ')
