@@ -89,7 +89,52 @@ konstrukcijas pakeičiant į rekursiją bei iteratorių:
 
 \section{Pavyzdžiai}
 
-\subsection{Pirmas pavyzdys}
+\subsection{Pirmasis pavyzdys: paprastas atvejis}
+
+\begin{pythonaienv}[fc]
+# Taisyklės:
+FB Z                                    # R1: F, B → Z
+CD F                                    # R2: C, D → F
+A D                                     # R3: A → D
+# Faktai:
+ABC
+# Tikslas:
+Z
+\end{pythonaienv}
+
+\subsection{Antrasis pavyzdys: du išvedimo keliai}
+
+\begin{pythonaienv}[fc]
+# Taisyklės:
+D Z                                     # R1: D → Z
+C D                                     # R2: C → D
+B C                                     # R3: B → C
+A G                                     # R4: A → G
+G Z                                     # R5: G → Z
+A B                                     # R6: A → B
+# Faktai:
+A
+# Tikslas:
+Z
+\end{pythonaienv}
+
+\subsection{Trečiasis pavyzdys: du išvedimo keliai (taisyklės kita tvarka)}
+
+\begin{pythonaienv}[fc]
+# Taisyklės:
+A G                                     # R1: A → G
+D Z                                     # R2: D → Z
+C D                                     # R3: C → D
+B C                                     # R4: B → C
+A B                                     # R5: A → B
+G Z                                     # R6: G → Z
+# Faktai:
+A
+# Tikslas:
+Z
+\end{pythonaienv}
+
+\subsection{Ketvirtasis pavyzdys: didesnis testas}
 
 \begin{pythonaienv}[fc]
 # Taisyklės:
@@ -106,7 +151,7 @@ ABC
 Z
 \end{pythonaienv}
 
-\subsection{Antras pavyzdys}
+\subsection{Penktasis pavyzdys: ilgas antecedentas}
 
 \begin{pythonaienv}[fc]
 # Taisyklės:
@@ -116,30 +161,14 @@ A B                                     # R3: A → B
 B C                                     # R4: B → C
 C D                                     # R5: C → D
 D Z                                     # R6: D → Z
+ABGCDZ H                                # R7: A, B, C, D, G, Z → H
 # Faktai:
 A
 # Tikslas:
-Z
+H
 \end{pythonaienv}
 
-\subsection{Trečias pavyzdys}
-
-\begin{pythonaienv}[fc]
-# Taisyklės:
-CD F                                    # R1: C, D → F
-A D                                     # R2: A → D
-A L                                     # R3: A → L
-L K                                     # R4: L → K
-B A                                     # R5: B → A
-D M                                     # R6: D → M
-FB Z                                    # R7: F, B → Z
-# Faktai:
-ABC
-# Tikslas:
-Z
-\end{pythonaienv}
-
-\subsection{Ketvirtas pavyzdys}
+\subsection{Šeštasis pavyzdys: išvedimas neegzistuoja}
 
 \begin{pythonaienv}[fc]
 # Taisyklės:
@@ -156,7 +185,7 @@ ABC
 H
 \end{pythonaienv}
 
-\subsection{Penktas pavyzdys}
+\subsection{Septintasis pavyzdys: tikslas tarp prielaidų}
 
 \begin{pythonaienv}[fc]
 # Taisyklės:
@@ -173,7 +202,7 @@ ABC
 B
 \end{pythonaienv}
 
-\subsection{Šeštas pavyzdys}
+\subsection{Aštuntasis pavyzdys}
 
 \begin{pythonaienv}[fc]
 
