@@ -28,10 +28,15 @@ arba nebėra taisyklių, kurias galima būtų pritaikyti.
 
 \label{sec:fc:pseudo}
 
+Pradiniai duomenys:
 \begin{description}
   \item[$R$] – taisyklių aibė.
   \item[$F$] – pradinių faktų aibė.
   \item[$G$] – ieškomas tikslas.
+\end{description}
+
+Rezultatas:
+\begin{description}
   \item[$Q$] – panaudotų taisyklių seka.
 \end{description}
 \begin{algorithmic}[1]
@@ -60,12 +65,12 @@ arba nebėra taisyklių, kurias galima būtų pritaikyti.
 
 Tiesioginio išvedimo sistema parašyta naudojant Python programavimo
 kalbą. Sistema susideda iš trijų modulių:
-\begin{itemize}
+\begin{enumerate}
   \item \verb|utils| – pagalbinės funkcijos ir klasės;
   \item \verb|forwardchaining| – modulis, kuriame realizuotas
     tiesioginio išvedimo funkcionalumas;
   \item \verb|main| – vykdomasis modulis.
-\end{itemize}
+\end{enumerate}
 
 \begin{sloppypar}
 Visi duomenys (produkcijų sistema) yra saugomi klasėje
