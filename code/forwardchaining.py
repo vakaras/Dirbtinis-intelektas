@@ -101,10 +101,12 @@ class ForwardChaining:
         self.file.write(str(self.production_system))
         self.file.write('\n')
 
-    def print_graph(self, title='Semantinis grafas'):
+    def print_graph(self, invoke_counter):
         """ Į rezultatų failą išveda gautą grafą.
         """
-        env = utils.Environment('pythonaienv', ('graph', True))
+        label = 'graph:{0}'.format(invoke_counter)
+        env = utils.Environment('pythonaienv',
+                ('graph|{0}|Semantinis grafas.'.format(label), True))
         env.append('digraph G {\n')
         env.append('node [fixedsize="true", fontsize=11, '
                    'width="0.3cm", height="0.3cm"];\n')
@@ -129,7 +131,9 @@ class ForwardChaining:
                 env.append('{0} -> {1};\n', fact, rule.index)
             env.append('{0} -> {1};\n', rule.index, rule.result)
         env.append('}\n')
-        self.file.write('\n\n{0}:\n'.format(title))
+        self.file.write((
+            '\n\nSemantinis grafas pateiktas \\ref{{{0}}} '
+            'paveikslėlyje.\n').format(label))
         self.file.write(str(env))
 
     def recursion(self, rules, facts, goal):

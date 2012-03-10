@@ -32,7 +32,7 @@ def echo(input_file, output_file):
             fout.write(str(env))
 
 
-def graph(input_file, output_file, invoke_counter):
+def graph(input_file, output_file, invoke_counter, label, caption):
     """ Generates image from dot file.
     """
 
@@ -44,7 +44,8 @@ def graph(input_file, output_file, invoke_counter):
         env = utils.Environment('figure', ('H', True))
         env.append('\\centering\n')
         env.append('\\includegraphics[scale=0.7]{{{0}}}\n', image_file)
-        env.append('\\caption{Semantinis grafas}')
+        env.append('\\caption{{{0}}}\n'.format(caption))
+        env.append('\\label{{{0}}}\n'.format(label))
         fout.write(str(env))
 
 
@@ -63,7 +64,7 @@ def show_source(input_file, output_file):
         fout.write(str(listing))
 
 
-def forward_chaining(input_file, output_file):
+def forward_chaining(input_file, output_file, invoke_counter):
     """ Tries to solve production system, by using forward chaining.
     """
     with open(input_file) as fin:
@@ -71,17 +72,26 @@ def forward_chaining(input_file, output_file):
             solver = forwardchaining.ForwardChaining(fin, fout)
             solver.print_input()
             solver.solve()
-            solver.print_graph()
+            solver.print_graph(invoke_counter)
 
 
 if __name__ == '__main__':
     if len(sys.argv) < 4:
         usage()
-    elif sys.argv[1] == 'echo':
-        echo(*sys.argv[2:4])
-    elif sys.argv[1] == 'graph':
-        graph(*sys.argv[2:5])
-    elif sys.argv[1] == 'fc':
-        forward_chaining(*sys.argv[2:4])
-    elif sys.argv[1] == 'source':
-        show_source(*sys.argv[2:4])
+    else:
+        args = sys.argv[1]
+        if '|' in args:
+            args = args.split('|')
+            program = args[0]
+        else:
+            program = args
+            args = [args]
+
+        if program == 'echo':
+            echo(*sys.argv[2:4])
+        elif program == 'graph':
+            graph(*(sys.argv[2:5] + args[1:]))
+        elif program == 'fc':
+            forward_chaining(*sys.argv[2:5])
+        elif program == 'source':
+            show_source(*sys.argv[2:4])
