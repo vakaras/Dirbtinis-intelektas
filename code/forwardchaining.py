@@ -30,7 +30,7 @@ class Rule:
 
 
 class ProductionSystem:
-    """ Produkcijų sistema.
+    """ Produkcijų sistema. (Trejetas <R, F, G>.)
     """
 
     def __init__(self, rules, facts, goal):

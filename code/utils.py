@@ -16,7 +16,7 @@ def uncomment(string):
 
 
 class Environment:
-    """ Helper for writing LaTeX environment.
+    """ Pagalbinė klasė LaTeX aplinkų kūrimui.
     """
 
     def __init__(self, name, *args):
@@ -41,7 +41,7 @@ class Environment:
 
 
 class EnumerateEnvironment(Environment):
-    """ Helper for writing LaTeX enumerate.
+    """ Pagalbinė klasė LaTeX enumerate aplinkų kūrimui.
     """
 
     def __init__(self):
