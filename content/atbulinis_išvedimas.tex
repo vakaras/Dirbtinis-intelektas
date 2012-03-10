@@ -1,1 +1,53 @@
 \chapter{Atbulinis išvedimas}
+
+Pradedam nuo galo. Į Backtrace išvedame viską. Į atsakymą išvedame tik tai
+ko reikia.
+
+\section{Pseudo kodas}
+
+\label{sec:bc:pseudo}
+
+Pradiniai duomenys:
+\begin{description}
+  \item[$R$] – taisyklių aibė;
+  \item[$F$] – pradinių faktų aibė;
+  \item[$G$] – ieškomas tikslas.
+\end{description}
+
+Rezultatas:
+\begin{description}
+  \item[$Q$] – panaudotų taisyklių seka.
+\end{description}
+
+Kiti kintamieji:
+\begin{description}
+  \item[$P$] – ieškomų tikslų aibė.
+\end{description}
+
+\begin{algorithmic}[1]
+  \Function{atbulinis išvedimas}{$R, F, G, P := \left\{ G \right\}$}
+    \If{$G \in F$}
+      \State \Return $\emptyset$
+    \Else
+      \ForAll{$r \in R \land r$ išvada yra $G \land$ nė viena iš $r$
+              prielaidų $\not\in P$}
+        \State $Q := \left( \right)$
+        \ForAll{$g \in r$ prielaidos}
+          \State $K := $ atbulinis išvedimas$(%
+            R\setminus \left\{ r \right\}, F, g,%
+            P \cup \left\{ g \right\})$;
+          \If{$K =$ nesėkmė}
+            \State $Q :=$ nesėkmė;
+            \State break
+          \Else
+            \State $Q := Q \cup K$;
+          \EndIf
+          \If{$Q \neq$ nesėkmė}
+            \State \Return $Q$;
+          \EndIf
+        \EndFor
+      \EndFor
+      \State \Return nesėkmė;
+    \EndIf
+  \EndFunction
+\end{algorithmic}
