@@ -64,6 +64,24 @@ def show_source(input_file, output_file):
         fout.write(str(listing))
 
 
+def show_structure(input_file, output_file):
+    """ Shows program structure.
+    """
+
+    env = utils.EnumerateEnvironment()
+    modules = [utils, forwardchaining]
+    for module in modules:
+        innerenv = utils.EnumerateEnvironment()
+        for name, cls in inspect.getmembers(module, inspect.isclass):
+            innerenv.append(
+                    '\\verb|{0}|\n\n{1}\n', name, inspect.getdoc(cls))
+        env.append('Modulyje \\verb|{0}| apibrėžtos klasės:\n{1}',
+                module.__name__, innerenv)
+
+    with open(output_file, 'w') as fp:
+        fp.write(str(env))
+
+
 def forward_chaining(input_file, output_file, invoke_counter):
     """ Tries to solve production system, by using forward chaining.
     """
@@ -95,3 +113,5 @@ if __name__ == '__main__':
             forward_chaining(*sys.argv[2:5])
         elif program == 'source':
             show_source(*sys.argv[2:4])
+        elif program == 'structure':
+            show_structure(*sys.argv[2:4])
