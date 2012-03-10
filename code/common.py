@@ -113,6 +113,7 @@ class Solver:
         node = 'node [shape="{0}"]; {1}; \n'
         rules = set()
         facts = set()
+        edges = set()
         def add_rule(rule):
             if rule.index not in rules:
                 env.append(node, 'circle', rule.index)
@@ -121,14 +122,20 @@ class Solver:
             if fact not in facts:
                 env.append(node, 'box', fact)
                 facts.add(fact)
+        def add_edge(a, b):
+            if (a, b) not in edges:
+                env.append('{0} -> {1};\n', a, b)
+                edges.add((a, b))
         for fact in self.production_system.facts:
             add_fact(fact)
         for rule in self.solution:
             add_rule(rule)
             add_fact(rule.result)
             for fact in rule.premises:
-                env.append('{0} -> {1};\n', fact, rule.index)
-            env.append('{0} -> {1};\n', rule.index, rule.result)
+                add_edge(fact, rule.index)
+                #env.append('{0} -> {1};\n', fact, rule.index)
+            add_edge(rule.index, rule.result)
+            #env.append('{0} -> {1};\n', rule.index, rule.result)
         env.append('}\n')
         self.file.write((
             '\n\nSemantinis grafas pateiktas \\ref{{{0}}} '
