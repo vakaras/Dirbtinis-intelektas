@@ -35,10 +35,15 @@ def show_source(input_file, output_file):
     """ Shows information about object defined in input file.
     """
     expression = open(input_file).read().strip()
-    env = utils.Environment('minted', ('linenos,texcl', True), ('python', False))
+    env = utils.Environment('minted',
+            ('linenos,texcl', True), ('python', False))
     env.append(inspect.getsource(eval(expression)))
+    listing = utils.Environment('listing', ('H', True))
+    listing.append('Objekto \\verb|{0}| kodas:', expression)
+    listing.append('\\caption{{{0}}}', expression)
+    listing.append(str(env))
     with open(output_file, 'w') as fout:
-        fout.write(str(env))
+        fout.write(str(listing))
 
 
 def forward_chaining(input_file, output_file):
