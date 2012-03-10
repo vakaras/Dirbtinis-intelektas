@@ -104,17 +104,21 @@ class ForwardChaining:
     def print_graph(self, title='Semantinis grafas'):
         """ Į rezultatų failą išveda gautą grafą.
         """
-        env = utils.Environment('dot2tex', ('mathmode,fdp', True))
+        env = utils.Environment('pythonaienv', ('graph', True))
         env.append('digraph G {\n')
+        env.append('node [fixedsize="true", fontsize=11, '
+                   'width="0.3cm", height="0.3cm"];\n')
+        env.append('edge [arrowsize="1.5"];\n')
+        node = 'node [shape="{0}"]; {1}; \n'
         rules = set()
         facts = set()
         def add_rule(rule):
             if rule.index not in rules:
-                env.append('node [shape="circle"]; {0};\n', rule.index)
+                env.append(node, 'circle', rule.index)
                 rules.add(rule.index)
         def add_fact(fact):
             if fact not in facts:
-                env.append('node [shape="box"]; {0};\n', fact)
+                env.append(node, 'box', fact)
                 facts.add(fact)
         for fact in self.production_system.facts:
             add_fact(fact)

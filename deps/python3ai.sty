@@ -1,6 +1,9 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{python3ai}
 
+\newcounter{pythoninvokecounter}
+\setcounter{pythoninvokecounter}{0}
+
 \newwrite\pythonArg
 \newcommand\pythonai[2]
 {
@@ -9,8 +12,10 @@
   \immediate\closeout\pythonArg
   \immediate\write18 {%
     python3 code/main.py "#1" %
-    "dist/\jobname.python3ai.in" "dist/\jobname.python3ai.out"}
+    "dist/\jobname.python3ai.in" "dist/\jobname.python3ai.out" %
+    "\arabic{pythoninvokecounter}"}
   \input{\jobname.python3ai.out}
+  \addtocounter{pythoninvokecounter}{1}
 }
 
 %\newenvironment{pythonaienv}[1]
@@ -44,8 +49,10 @@
 \endgroup
 \immediate\closeout\@out
 \@writemodule
-  \immediate\write18 {%
-    python3 code/main.py "\@pythonaienvcommand" %
-    "dist/\jobname.python3ai.in" "dist/\jobname.python3ai.out"}
-  \immediate\input{\jobname.python3ai.out}
-  }
+\immediate\write18 {%
+  python3 code/main.py "\@pythonaienvcommand" %
+  "dist/\jobname.python3ai.in" "dist/\jobname.python3ai.out" %
+  "\arabic{pythoninvokecounter}"}
+\immediate\input{\jobname.python3ai.out}
+\addtocounter{pythoninvokecounter}{1}
+}

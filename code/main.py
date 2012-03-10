@@ -11,6 +11,7 @@ import sys
 import forwardchaining
 import inspect
 import utils
+import os
 
 
 def usage():
@@ -29,6 +30,22 @@ def echo(input_file, output_file):
             for i, line in enumerate(fin):
                 env.append('{0:3}: {1}', i+1, line)
             fout.write(str(env))
+
+
+def graph(input_file, output_file, invoke_counter):
+    """ Generates image from dot file.
+    """
+
+    image_file = 'dist/document-graph-{0}.png'.format(invoke_counter)
+    command = 'dot -Tpng -o "{0}" "{1}"'.format(
+            image_file, input_file)
+    os.system(command)
+    with open(output_file, 'w') as fout:
+        env = utils.Environment('figure', ('H', True))
+        env.append('\\centering\n')
+        env.append('\\includegraphics[scale=0.7]{{{0}}}\n', image_file)
+        env.append('\\caption{Semantinis grafas}')
+        fout.write(str(env))
 
 
 def show_source(input_file, output_file):
@@ -61,8 +78,10 @@ if __name__ == '__main__':
     if len(sys.argv) < 4:
         usage()
     elif sys.argv[1] == 'echo':
-        echo(*sys.argv[2:])
+        echo(*sys.argv[2:4])
+    elif sys.argv[1] == 'graph':
+        graph(*sys.argv[2:5])
     elif sys.argv[1] == 'fc':
-        forward_chaining(*sys.argv[2:])
+        forward_chaining(*sys.argv[2:4])
     elif sys.argv[1] == 'source':
-        show_source(*sys.argv[2:])
+        show_source(*sys.argv[2:4])
