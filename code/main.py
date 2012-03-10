@@ -37,7 +37,7 @@ def graph(input_file, output_file, invoke_counter, label, caption):
     """
 
     image_file = 'dist/document-graph-{0}.png'.format(invoke_counter)
-    command = 'dot -Tpng -o "{0}" "{1}"'.format(
+    command = 'dot -q2 -Tpng -o "{0}" "{1}"'.format(
             image_file, input_file)
     os.system(command)
     with open(output_file, 'w') as fout:
