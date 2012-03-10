@@ -9,6 +9,7 @@ Allowed commands:
 
 import sys
 import forwardchaining
+import backwardchaining
 import inspect
 import utils
 import os
@@ -82,15 +83,30 @@ def show_structure(input_file, output_file):
         fp.write(str(env))
 
 
+def solve(solver, invoke_counter):
+    """ Tries to solve production system, by using solver.
+    """
+    solver.print_input()
+    solver.solve()
+    solver.print_graph(invoke_counter)
+
+
 def forward_chaining(input_file, output_file, invoke_counter):
     """ Tries to solve production system, by using forward chaining.
     """
     with open(input_file) as fin:
         with open(output_file, 'w') as fout:
             solver = forwardchaining.ForwardChaining(fin, fout)
-            solver.print_input()
-            solver.solve()
-            solver.print_graph(invoke_counter)
+            solve(solver, invoke_counter)
+
+
+def backward_chaining(input_file, output_file, invoke_counter):
+    """ Tries to solve production system, by using backward chaining.
+    """
+    with open(input_file) as fin:
+        with open(output_file, 'w') as fout:
+            solver = backwardchaining.BackwardChaining(fin, fout)
+            solve(solver, invoke_counter)
 
 
 if __name__ == '__main__':
@@ -111,6 +127,8 @@ if __name__ == '__main__':
             graph(*(sys.argv[2:5] + args[1:]))
         elif program == 'fc':
             forward_chaining(*sys.argv[2:5])
+        elif program == 'bc':
+            backward_chaining(*sys.argv[2:5])
         elif program == 'source':
             show_source(*sys.argv[2:4])
         elif program == 'structure':
