@@ -1,7 +1,11 @@
 \chapter{Atbulinis išvedimas}
 
-Pradedam nuo galo. Į Backtrace išvedame viską. Į atsakymą išvedame tik tai
-ko reikia.
+\section{Užduotis}
+
+Parašyti programą, kuri, kaip pradinius duomenis gavusi trejetą
+$<R, F, G>$, panaudodama atbulinio išvedimo sistemą nustatytų
+ar tikslas $G$ yra išvedamas ir jei taip, tai kokias produkcijas
+turime pritaikyti, kad jį gautume.
 
 \section{Pseudo kodas}
 
@@ -16,41 +20,52 @@ Pradiniai duomenys:
 
 Rezultatas:
 \begin{description}
-  \item[$Q$] – panaudotų taisyklių seka.
+  \item[$Q$] – panaudotų taisyklių seka arba „nesėkmė“.
 \end{description}
 
 Kiti kintamieji:
 \begin{description}
+  \item[$K$] – panaudotų taisyklių sekos dalis;
   \item[$P$] – ieškomų tikslų aibė.
 \end{description}
 
 \begin{algorithmic}[1]
   \Function{atbulinis išvedimas}{$R, F, G, P := \left\{ G \right\}$}
-    \If{$G \in F$}
-      \State \Return $\emptyset$
+    \If{$G \in F$} \label{bc:pseudo:goal_in_facts}
+      \State \Return $\emptyset$ \label{bc:pseudo:emptyset}
     \Else
       \ForAll{$r \in R \land r$ išvada yra $G \land$ nė viena iš $r$
-              prielaidų $\not\in P$}
-        \State $Q := \left( \right)$
-        \ForAll{$g \in r$ prielaidos}
+              prielaidų $\not\in P$} \label{bc:pseudo:rule_iter}
+        \State $Q := \left( \right)$ \label{bc:pseudo:initial_Q}
+        \ForAll{$g \in r$ prielaidos} \label{bc:pseudo:premise_iter}
           \State $K := $ atbulinis išvedimas$(%
             R\setminus \left\{ r \right\}, F, g,%
-            P \cup \left\{ g \right\})$;
-          \If{$K =$ nesėkmė}
+            P \cup \left\{ g \right\})$; \label{bc:pseudo:recursion}
+          \If{$K =$ nesėkmė} \label{bc:pseudo:rule:fail}
             \State $Q :=$ nesėkmė;
             \State break
-          \Else
+          \Else \label{bc:pseudo:rule:success}
             \State $Q := Q \cup K$;
           \EndIf
-          \If{$Q \neq$ nesėkmė}
-            \State \Return $Q$;
+          \If{$Q \neq$ nesėkmė} \label{bc:pseudo:success}
+            \State \Return $Q \cup \left\{ R \right\}$;%
+              \label{bc:pseudo:return_succ}
           \EndIf
         \EndFor
       \EndFor
-      \State \Return nesėkmė;
+      \State \Return nesėkmė; \label{bc:pseudo:failure}
     \EndIf
   \EndFunction
 \end{algorithmic}
+
+\section{Realizacija}
+
+Atbulinio išvedimo algoritmo, pateikto \ref{sec:fc:pseudo}
+skyrelyje, realizacija:
+
+\pythonai{source}{forwardchaining.ForwardChaining.recursion}
+
+\section{Pavyzdžiai}
 
 \subsection{Pirmasis pavyzdys: paprastas atvejis}
 
@@ -63,4 +78,125 @@ A D                                     # R3: A → D
 ABC
 # Tikslas:
 Z
+\end{pythonaienv}
+
+\subsection{Antrasis pavyzdys: du išvedimo keliai}
+
+\begin{pythonaienv}[bc]
+# Taisyklės:
+D Z                                     # R1: D → Z
+C D                                     # R2: C → D
+B C                                     # R3: B → C
+A G                                     # R4: A → G
+G Z                                     # R5: G → Z
+A B                                     # R6: A → B
+# Faktai:
+A
+# Tikslas:
+Z
+\end{pythonaienv}
+
+\subsection{Trečiasis pavyzdys: du išvedimo keliai (taisyklės kita tvarka)}
+
+\begin{pythonaienv}[bc]
+# Taisyklės:
+A G                                     # R1: A → G
+D Z                                     # R2: D → Z
+C D                                     # R3: C → D
+B C                                     # R4: B → C
+A B                                     # R5: A → B
+G Z                                     # R6: G → Z
+# Faktai:
+A
+# Tikslas:
+Z
+\end{pythonaienv}
+
+\subsection{Ketvirtasis pavyzdys: didesnis testas}
+
+\begin{pythonaienv}[bc]
+# Taisyklės:
+FB Z                                    # R1: F, B → Z
+CD F                                    # R2: C, D → F
+A D                                     # R3: A → D
+A L                                     # R4: A → L
+L K                                     # R5: L → K
+B A                                     # R6: B → A
+D M                                     # R7: D → M
+# Faktai:
+ABC
+# Tikslas:
+Z
+\end{pythonaienv}
+
+\subsection{Penktasis pavyzdys: ilgas antecedentas}
+
+\begin{pythonaienv}[bc]
+# Taisyklės:
+G Z                                     # R1: G → Z
+A G                                     # R2: A → G
+A B                                     # R3: A → B
+B C                                     # R4: B → C
+C D                                     # R5: C → D
+D Z                                     # R6: D → Z
+ABGCDZ H                                # R7: A, B, C, D, G, Z → H
+# Faktai:
+A
+# Tikslas:
+H
+\end{pythonaienv}
+
+\subsection{Šeštasis pavyzdys: išvedimas neegzistuoja}
+
+\begin{pythonaienv}[bc]
+# Taisyklės:
+CD F                                    # R1: C, D → F
+A D                                     # R2: A → D
+A L                                     # R3: A → L
+L K                                     # R4: L → K
+B A                                     # R5: B → A
+D M                                     # R6: D → M
+FB Z                                    # R7: F, B → Z
+# Faktai:
+ABC
+# Tikslas:
+H
+\end{pythonaienv}
+
+\subsection{Septintasis pavyzdys: tikslas tarp prielaidų}
+
+\begin{pythonaienv}[bc]
+# Taisyklės:
+CD F                                    # R1: C, D → F
+A D                                     # R2: A → D
+A L                                     # R3: A → L
+L K                                     # R4: L → K
+B A                                     # R5: B → A
+D M                                     # R6: D → M
+FB Z                                    # R7: F, B → Z
+# Faktai:
+ABC
+# Tikslas:
+B
+\end{pythonaienv}
+
+\subsection{Aštuntasis pavyzdys}
+
+\begin{pythonaienv}[bc]
+
+# Taisyklės:
+A L                                     # R1: A → L
+L K                                     # R2: L → K
+D A                                     # R3: D → A
+D M                                     # R4: D → M
+EFB Z                                   # R5: E, F, B → Z
+ECD F                                   # R6: E, C, D → F
+EA D                                    # R7: E, A → D
+
+# Faktai:
+A B C E
+
+# Tikslas:
+Z
+
 \end{pythonaienv}

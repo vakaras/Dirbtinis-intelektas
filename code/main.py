@@ -70,7 +70,7 @@ def show_structure(input_file, output_file):
     """
 
     env = utils.EnumerateEnvironment()
-    modules = [utils, forwardchaining]
+    modules = [utils, forwardchaining, backwardchaining]
     for module in modules:
         innerenv = utils.EnumerateEnvironment()
         for name, cls in inspect.getmembers(module, inspect.isclass):

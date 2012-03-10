@@ -1,0 +1,57 @@
+\chapter{Įvadas}
+
+Tiesioginis ir atbulinis išvedimai yra vieni iš pagrindinių dirbtinio
+intelekto samprotavimo būdų produkcijų sistemoje.
+
+Tiesioginio ir atbulinio išvedimo uždavinį galime apibrėžti, kaip
+trejetą $<R, F, G>$, kur
+\begin{description}
+  \item[$R$] – taisyklių aibė;
+  \item[$F$] – pradinių faktų aibė;
+  \item[$G$] – ieškomas tikslas (faktas, kurį norime įrodyti).
+\end{description}
+Taisyklių aibei bendruoju atveju priklauso $n$ taisyklių, pavidalo:
+$Ri: A \to B$, kur $A$ yra faktų aibė, o $B$ – pagal taisyklę
+$Ri$ iš faktų $A$ išvedamas faktas.
+
+Tiesioginio išvedimo sistema bando išvesti ieškomąjį faktą $G$
+tikrindama visas taisykles ir iš jų pritaikydama tas, kurių
+prielaidos yra tarp jau išvestų faktų ir kurias panaudojant išvedamų
+faktų dar nėra tarp rezultatų, tol kol yra gaunamas ieškomas tikslas
+arba nebėra taisyklių, kurias galima būtų pritaikyti.
+
+Atbulinio išvedimo sistema veikia iš priešingos pusės: pradeda
+nuo tikslo, ieško taisyklės, kurios išvada yra tikslas, o tada
+rekursyviai bando išvesti kiekvieną trūkstamą tos taisyklės
+prielaidą.
+
+\section{Realizacijos aprašymas}
+
+Sistema parašyta naudojant Python programavimo kalbą. Sistema susideda
+iš šių modulių:
+\begin{enumerate}
+  \item \verb|utils| – pagalbinės funkcijos ir klasės;
+  \item \verb|forwardchaining| – modulis, kuriame realizuotas
+    tiesioginio išvedimo funkcionalumas;
+  \item \verb|backwardchaining| – modulis, kuriame realizuotas
+    atbulinio išvedimo funkcionalumas;
+  \item \verb|main| – vykdomasis modulis.
+\end{enumerate}
+
+\begin{sloppypar}
+Visi duomenys (produkcijų sistema) yra saugomi klasėje
+\verb|ProductionSystem|. Klasių \verb|ForwardChaining| ir
+\verb|BackwardChaining| tipo objektai gauna rezultatą (taisykles,
+kurias reikia pritaikyti norint pasiekti tikslą) manipuliuodami
+susikurtu \verb|ProductionSystem| objektu. Visus duomenis sistema
+išveda \LaTeX transliatoriui suprantamu formatu: dėl to visi šiame
+dokumente pateikti pavyzdžiai iš tiesų yra sistemos išvestis.
+Konkrečius programai pateiktus duomenis galima pamatyti atsidarius šio
+dokumento išeities tekstą. (Buvo nuspręsta jų dokumente nerodyti,
+nes sistema darbo pradžioje išveda gautus duomenis – tai yra,
+informacija būtų dubliuojama.)
+\end{sloppypar}
+
+\section{Klasių išskirstymas į modulius}
+
+\pythonai{structure}{}
