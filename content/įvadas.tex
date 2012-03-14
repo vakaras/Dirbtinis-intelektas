@@ -3,16 +3,19 @@
 Tiesioginis ir atbulinis išvedimai yra vieni iš pagrindinių dirbtinio
 intelekto samprotavimo būdų produkcijų sistemoje.
 
-Tiesioginio ir atbulinio išvedimo uždavinį galime apibrėžti, kaip
-trejetą $<R, F, G>$, kur
+Tiesioginio ir atbulinio išvedimų uždavinys yra, turint trejetą
+$<R, F, G>$, kur
 \begin{description}
   \item[$R$] – taisyklių aibė;
   \item[$F$] – pradinių faktų aibė;
-  \item[$G$] – ieškomas tikslas (faktas, kurį norime įrodyti).
+  \item[$G$] – ieškomas tikslas (faktas, kurį norime įrodyti),
 \end{description}
-Taisyklių aibei bendruoju atveju priklauso $n$ taisyklių, pavidalo:
-$Ri: A \to B$, kur $A$ yra faktų aibė, o $B$ – pagal taisyklę
-$Ri$ iš faktų $A$ išvedamas faktas.
+rasti tokią taisyklių (kurios būtų iš aibės $R$) seką be pasikartojimų,
+kurią pritaikius pradinių faktų aibei gautume faktų aibę, kuriai
+priklauso mūsų ieškomas tikslas $G$. Taisyklių aibei bendruoju
+atveju priklauso $n$ taisyklių, pavidalo: $Ri: A \to B$, kur $A$ yra
+faktų aibė, o $B$ – pagal taisyklę $Ri$ iš faktų $A$ išvedamas
+faktas.
 
 Tiesioginio išvedimo sistema bando išvesti ieškomąjį faktą $G$
 tikrindama visas taisykles ir iš jų pritaikydama tas, kurių
