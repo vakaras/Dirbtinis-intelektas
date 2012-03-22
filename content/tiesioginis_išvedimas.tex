@@ -168,3 +168,107 @@ ABC
 # Tikslas:
 B
 \end{pythonaienv}
+
+\subsection{Aštuntasis pavyzdys: devynių produkcijų DC}
+
+\begin{pythonaienv}[fc]
+# Taisyklės:
+DC Z
+C D
+B C
+A B
+D A
+T D
+G A
+H B
+J C
+# Faktai:
+T
+# Tikslas:
+Z
+\end{pythonaienv}
+
+\subsection{Devintasis pavyzdys: devynių produkcijų CD}
+
+\begin{pythonaienv}[fc]
+# Taisyklės:
+CD Z
+C D
+B C
+A B
+D A
+T D
+G A
+H B
+J C
+# Faktai:
+T
+# Tikslas:
+Z
+\end{pythonaienv}
+
+\subsection{Dešimtasis pavyzdys: labirintas}
+
+\begin{pythonaienv}[fc]
+# Taisyklės:
+@t             # R1: t → @
+@y             # R2: y → @
+ds             # R3: s → d
+sd             # R4: d → s
+as             # R5: s → a
+sa             # R6: a → s
+bs             # R7: s → b
+sb             # R8: b → s
+cs             # R9: s → c
+sc             # R10: c → s
+vd             # R11: d → v
+dv             # R12: v → d
+yv             # R13: v → y
+vy             # R14: y → v
+wv             # R15: v → w
+vw             # R16: w → v
+xv             # R17: v → x
+vx             # R18: x → v
+wz             # R19: z → w
+zw             # R20: w → z
+tz             # R21: z → t
+zt             # R22: t → z
+ea             # R23: a → e
+ae             # R24: e → a
+fe             # R25: e → f
+ef             # R26: f → e
+gf             # R27: f → g
+fg             # R28: g → f
+hg             # R29: g → h
+gh             # R30: h → g
+ih             # R31: h → i
+hi             # R32: i → h
+jh             # R33: h → j
+hj             # R34: j → h
+ki             # R35: i → k
+ik             # R36: k → i
+lk             # R37: k → l
+kl             # R38: l → k
+ml             # R39: l → m
+lm             # R40: m → l
+om             # R41: m → o
+mo             # R42: o → m
+nm             # R43: m → n
+mn             # R44: n → m
+qo             # R45: o → q
+oq             # R46: q → o
+rq             # R47: q → r
+qr             # R48: r → q
+jq             # R49: q → j
+qj             # R50: j → q
+br             # R51: r → b
+rb             # R52: b → r
+pn             # R53: n → p
+np             # R54: p → n
+uc             # R55: c → u
+cu             # R56: u → c
+# Faktai:
+s
+# Tikslas:
+@
+\end{pythonaienv}
