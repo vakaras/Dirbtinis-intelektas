@@ -60,7 +60,7 @@ Kiti kintamieji:
 
 \section{Realizacija}
 
-Atbulinio išvedimo algoritmo, pateikto \ref{sec:fc:pseudo}
+Atbulinio išvedimo algoritmo, pateikto \ref{sec:bc:pseudo}
 skyrelyje, realizacija:
 
 \pythonai{source}{backwardchaining.BackwardChaining.recursion}
@@ -182,4 +182,108 @@ FB Z                                    # R7: F, B → Z
 ABC
 # Tikslas:
 B
+\end{pythonaienv}
+
+\subsection{Aštuntasis pavyzdys: devynių produkcijų DC}
+
+\begin{pythonaienv}[bc]
+# Taisyklės:
+DC Z
+C D
+B C
+A B
+D A
+T D
+G A
+H B
+J C
+# Faktai:
+T
+# Tikslas:
+Z
+\end{pythonaienv}
+
+\subsection{Devintasis pavyzdys: devynių produkcijų CD}
+
+\begin{pythonaienv}[bc]
+# Taisyklės:
+CD Z
+C D
+B C
+A B
+D A
+T D
+G A
+H B
+J C
+# Faktai:
+T
+# Tikslas:
+Z
+\end{pythonaienv}
+
+\subsection{Dešimtasis pavyzdys: labirintas}
+
+\begin{pythonaienv}[bc]
+# Taisyklės:
+t@             # R1: t → @
+y@             # R2: y → @
+sd             # R3: s → d
+ds             # R4: d → s
+sa             # R5: s → a
+as             # R6: a → s
+sb             # R7: s → b
+bs             # R8: b → s
+sc             # R9: s → c
+cs             # R10: c → s
+dv             # R11: d → v
+vd             # R12: v → d
+vy             # R13: v → y
+yv             # R14: y → v
+vw             # R15: v → w
+wv             # R16: w → v
+vx             # R17: v → x
+xv             # R18: x → v
+zw             # R19: z → w
+wz             # R20: w → z
+zt             # R21: z → t
+tz             # R22: t → z
+ae             # R23: a → e
+ea             # R24: e → a
+ef             # R25: e → f
+fe             # R26: f → e
+fg             # R27: f → g
+gf             # R28: g → f
+gh             # R29: g → h
+hg             # R30: h → g
+hi             # R31: h → i
+ih             # R32: i → h
+hj             # R33: h → j
+jh             # R34: j → h
+ik             # R35: i → k
+ki             # R36: k → i
+kl             # R37: k → l
+lk             # R38: l → k
+lm             # R39: l → m
+ml             # R40: m → l
+mo             # R41: m → o
+om             # R42: o → m
+mn             # R43: m → n
+nm             # R44: n → m
+oq             # R45: o → q
+qo             # R46: q → o
+qr             # R47: q → r
+rq             # R48: r → q
+qj             # R49: q → j
+jq             # R50: j → q
+rb             # R51: r → b
+br             # R52: b → r
+np             # R53: n → p
+pn             # R54: p → n
+cu             # R55: c → u
+uc             # R56: u → c
+# Faktai:
+s
+# Tikslas:
+@
 \end{pythonaienv}
