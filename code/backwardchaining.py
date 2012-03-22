@@ -11,8 +11,10 @@ class BackwardChaining(Solver):
     def recursion(self, rules, facts, goal, goals):
         """ Sprendžia rekursyviai.
         """
+        space = '→' * len(goals)
         if goal in facts:               # \ref{bc:pseudo:goal_in_facts}
-            self.trace.append('Tikslas {0} yra faktas. (Duota.)', goal)
+            self.trace.append('{1} Tikslas {0} yra faktas. (Duota.)',
+                    goal, space)
             return []                   # \ref{bc:pseudo:emptyset}
         for rule in rules:
                                         # \ref{bc:pseudo:rule_iter}
@@ -20,9 +22,9 @@ class BackwardChaining(Solver):
                 all(premise not in goals for premise in rule.premises)):
                                         # \ref{bc:pseudo:rule_iter}
                 self.trace.append(
-                        'Tikslas {0}. Randame: {1}. '
+                        '{3} Tikslas {0}. Randame: {1}. '
                         'Nauji tikslai: \\{{{2}\\}}.',
-                        goal, rule, ', '.join(rule.premises))
+                        goal, rule, ', '.join(rule.premises), space)
                 solution = []           # \ref{bc:pseudo:initial_Q}
                 for premise in rule.premises:
                                         # \ref{bc:pseudo:premise_iter}
@@ -36,11 +38,12 @@ class BackwardChaining(Solver):
                         solution += path
                 else:                   # \ref{bc:pseudo:success}
                     self.trace.append(
-                            'Tikslas {0} yra faktas. (Išvestas.)', goal)
+                            '{1} Tikslas {0} yra faktas. (Išvestas.)',
+                            goal, space)
                     solution.append(rule)
                     return solution     # \ref{bc:pseudo:return_succ}
         self.trace.append(
-                'Tikslas {0}. Fakto išvesti neįmanoma.', goal)
+                '{1} Tikslas {0}. Fakto išvesti neįmanoma.', goal, space)
         return                          # \ref{bc:pseudo:failure}
 
 
