@@ -23,8 +23,9 @@ class ForwardChaining(Solver):
                 facts.add(rule.result)  # \ref{fc:pseudo:add_fact}
                 self.trace.append(
                         'Pritaikome taisyklę: {0}. '
-                        'Faktų aibė po pritaikymo: $\\{{{1}\\}}$.',
-                        rule, ', '.join(facts))
+                        'Faktų aibė po pritaikymo: '
+                        '$\\{{${1}$\\}}$',
+                        rule, ', '.join(utils.math(fact) for fact in facts))
                 self.solution.append(rule)
                                         # \ref{fc:pseudo:add_rule}
                 return self.recursion(rules - {rule}, facts, goal)
