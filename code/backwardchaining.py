@@ -16,7 +16,7 @@ class BackwardChaining(Solver):
             self.trace.append('{1} Tikslas {0} yra faktas. (Duota.)',
                     goal, space)
             return []                   # \ref{bc:pseudo:emptyset}
-        for rule in rules:
+        for i, rule in enumerate(rules):
                                         # \ref{bc:pseudo:rule_iter}
             if (rule.result == goal and
                 all(premise not in goals for premise in rule.premises)):
@@ -28,8 +28,10 @@ class BackwardChaining(Solver):
                 solution = []           # \ref{bc:pseudo:initial_Q}
                 for premise in rule.premises:
                                         # \ref{bc:pseudo:premise_iter}
+                    rules_copy = rules[:]
+                    del rules_copy[i]
                     path = self.recursion(
-                            rules - {rule}, facts, premise,
+                            rules_copy, facts, premise,
                             goals | {premise})
                                         # \ref{bc:pseudo:recursion}
                     if path is None:    # \ref{bc:pseudo:rule:fail}

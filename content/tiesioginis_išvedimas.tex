@@ -13,8 +13,8 @@ turime pritaikyti, kad jį gautume.
 
 Pradiniai duomenys:
 \begin{description}
-  \item[$R$] – taisyklių aibė.
-  \item[$F$] – pradinių faktų aibė.
+  \item[$R$] – taisyklių sąrašas;
+  \item[$F$] – pradinių faktų aibė;
   \item[$G$] – ieškomas tikslas.
 \end{description}
 
@@ -47,12 +47,10 @@ Rezultatas:
 
 \section{Realizacija}
 
-Tiesioginio išvedimo algoritmas, pateiktas \ref{sec:fc:pseudo}
-skyrelyje, siekiant išvengti netinkamo programavimo stiliaus Python
-kalba, buvo realizuotas \emph{while} ir \emph{kita taisyklė}
-konstrukcijas pakeičiant į rekursiją bei iteratorių:
+Tiesioginio išvedimo algoritmo, pateikto \ref{sec:fc:pseudo}
+skyrelyje, realizacija:
 
-\pythonai{source}{forwardchaining.ForwardChaining.recursion}
+\pythonai{source}{forwardchaining.ForwardChaining.run}
 
 \section{Pavyzdžiai}
 

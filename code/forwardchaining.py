@@ -8,37 +8,42 @@ class ForwardChaining(Solver):
     tiesinio išvedimo metodu.
     """
 
-    def recursion(self, rules, facts, goal):
-        """ Sprendžia rekursyviai.
+    def run(self, rules, facts, goal):
+        """ Ieško tikslo naudodama tiesioginį išvedimą.
         """
-        if goal in facts:               # \ref{fc:pseudo:while_condition}
-            self.trace.append('Rąstas tikslas.')
-            return True
-        for rule in rules:
-                                        # \ref{fc:pseudo:while_condition}
-                                        # \ref{fc:pseudo:next_rule}
-            if (rule.premises.issubset(facts) and
-                    rule.result not in facts):
+        were_used = True
+        while were_used:                # \ref{fc:pseudo:while_condition}
+            were_used = False
+            for rule in rules:          # \ref{fc:pseudo:next_rule}
+                if hasattr(rule, 'used'):
+                    continue
+                if (all(premise in facts for premise in rule.premises) and
+                        rule.result not in facts):
                                         # \ref{fc:pseudo:if_condition}
-                facts.add(rule.result)  # \ref{fc:pseudo:add_fact}
-                self.trace.append(
-                        'Pritaikome taisyklę: {0}. '
-                        'Faktų aibė po pritaikymo: '
-                        '$\\{{${1}$\\}}$',
-                        rule, ', '.join(utils.math(fact) for fact in facts))
-                self.solution.append(rule)
+                    facts.add(rule.result)
+                                        # \ref{fc:pseudo:add_fact}
+                    self.trace.append(
+                            'Pritaikome taisyklę: {0}. '
+                            'Faktų aibė po pritaikymo: '
+                            '$\\{{${1}$\\}}$',
+                            rule,
+                            ', '.join(utils.math(fact) for fact in facts))
+                    self.solution.append(rule)
                                         # \ref{fc:pseudo:add_rule}
-                return self.recursion(rules - {rule}, facts, goal)
-                                        # \ref{fc:pseudo:start}
-        return False
+                    rule.used = True
+                    were_used = True
+
+                    if goal in facts:   # \ref{fc:pseudo:while_condition}
+                        self.trace.append('Rąstas tikslas.')
+                        return True
 
     def solve(self):
         """ Bando surasti tikslą naudodama tiesioginį išvedimą.
         """
 
         self.trace = utils.EnumerateEnvironment()
-        if self.recursion(
-                self.production_system.rules,
+        if self.run(
+                self.production_system.rules[:],
                 self.production_system.facts.copy(),
                 self.production_system.goal,):
             self.file.write('\n\nAtsakymas: ')

@@ -7,7 +7,7 @@ class Rule:
 
     def __init__(self, result, premises, index=None):
         self.result = result
-        self.premises = set(premises)
+        self.premises = list(premises)
         self.index = index
 
     def __str__(self):
@@ -44,14 +44,14 @@ class ProductionSystem:
         """
         lines = iter(file)
 
-        rules = set()
+        rules = list()
         for line in lines:
             rule = Rule.from_string(line)
             if rule is None:
                 if rules:
                     break
             else:
-                rules.add(rule)
+                rules.append(rule)
                 rule.index = 'R{0}'.format(len(rules))
         else:
             raise Exception('Nepavyko nuskaityti duomenų: failo pabaiga.')
