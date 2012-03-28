@@ -57,12 +57,9 @@ def show_source(input_file, output_file):
     env = utils.Environment('minted',
             ('linenos,texcl', True), ('python', False))
     env.append(inspect.getsource(eval(expression)))
-    listing = utils.Environment('listing', ('H', True))
-    listing.append('Objekto \\verb|{0}| kodas:', expression)
-    listing.append('\\caption{{{0}}}', expression)
-    listing.append(str(env))
     with open(output_file, 'w') as fout:
-        fout.write(str(listing))
+        fout.write('Objekto \\verb|{0}| kodas:'.format(expression))
+        fout.write(str(env))
 
 
 def show_structure(input_file, output_file):
