@@ -8,12 +8,18 @@ class BackwardChaining(Solver):
     atbulinio išvedimo metodu.
     """
 
-    def recursion(self, rules, facts, goal, goals):
+    def recursion(self, rules, goal, goals):
         """ Sprendžia rekursyviai.
         """
         space = '→' * len(goals)
-        if goal in facts:               # \ref{bc:pseudo:goal_in_facts}
+        if goal in self.facts:
+                                        # \ref{bc:pseudo:goal_in_facts}
             self.trace.append('{1} Tikslas {0} yra faktas. (Duota.)',
+                    goal, space)
+            return []                   # \ref{bc:pseudo:emptyset}
+        if goal in self.new_facts:
+                                        # \ref{bc:pseudo:goal_in_facts}
+            self.trace.append('{1} Tikslas {0} yra faktas. (Naujas.)',
                     goal, space)
             return []                   # \ref{bc:pseudo:emptyset}
         for i, rule in enumerate(rules):
@@ -31,7 +37,7 @@ class BackwardChaining(Solver):
                     rules_copy = rules[:]
                     del rules_copy[i]
                     path = self.recursion(
-                            rules_copy, facts, premise,
+                            rules_copy, premise,
                             goals | {premise})
                                         # \ref{bc:pseudo:recursion}
                     if path is None:    # \ref{bc:pseudo:rule:fail}
@@ -43,6 +49,8 @@ class BackwardChaining(Solver):
                             '{1} Tikslas {0} yra faktas. (Išvestas.)',
                             goal, space)
                     solution.append(rule)
+                    self.new_facts.add(goal)
+                                        # \ref{bc:pseudo:add_fact}
                     return solution     # \ref{bc:pseudo:return_succ}
         self.trace.append(
                 '{1} Tikslas {0}. Fakto išvesti neįmanoma.', goal, space)
@@ -53,9 +61,10 @@ class BackwardChaining(Solver):
         """ Bando surasti tikslą naudodama atbulinį išvedimą.
         """
         self.trace = utils.EnumerateEnvironment()
+        self.facts = self.production_system.facts
+        self.new_facts = set()
         self.solution = self.recursion(
                 self.production_system.rules,
-                self.production_system.facts,
                 self.production_system.goal,
                 {self.production_system.goal},)
         if self.solution is not None:

@@ -26,12 +26,13 @@ Rezultatas:
 Kiti kintamieji:
 \begin{description}
   \item[$K$] – panaudotų taisyklių sekos dalis;
+  \item[$N$] – „naujų“ faktų aibė;
   \item[$P$] – ieškomų tikslų aibė.
 \end{description}
 
 \begin{algorithmic}[1]
   \Function{atbulinis išvedimas}{$R, F, G, P := \left\{ G \right\}$}
-    \If{$G \in F$} \label{bc:pseudo:goal_in_facts}
+    \If{$G \in F \lor G \in N$} \label{bc:pseudo:goal_in_facts}
       \State \Return $\emptyset$ \label{bc:pseudo:emptyset}
     \Else
       \ForAll{$r \in R \land r$ išvada yra $G \land$ nė viena iš $r$
@@ -48,6 +49,7 @@ Kiti kintamieji:
             \State $Q := Q \cup K$;
           \EndIf
           \If{$Q \neq$ nesėkmė} \label{bc:pseudo:success}
+            \State Pridedame $G$ į $N$. \label{bc:pseudo:add_fact}
             \State \Return $Q \cup \left\{ R \right\}$;%
               \label{bc:pseudo:return_succ}
           \EndIf
