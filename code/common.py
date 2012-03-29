@@ -100,6 +100,26 @@ class Solver:
         self.file.write(str(self.production_system))
         self.file.write('\n')
 
+    def save_raw_input(self, filename):
+        """ Sukuria pradinių duomenų failą.
+        """
+        with open(filename, 'w') as fout:
+            def write(template='', *args):
+                template += '\n'
+                fout.write(template.format(*args))
+            write('# Vytauto Astrausko failas.')
+            write('1. Taisyklės.')
+            for rule in self.production_system.rules:
+                write('{0}{1:<39}# {2}: {3} → {4}',
+                      rule.result, ''.join(rule.premises),
+                      rule.index, ', '.join(rule.premises), rule.result)
+            write()
+            write('2. Faktai.')
+            write(''.join(self.production_system.facts))
+            write()
+            write('3. Tikslas.')
+            write(self.production_system.goal)
+
     def print_graph(self, invoke_counter):
         """ Į rezultatų failą išveda gautą grafą.
         """
