@@ -41,10 +41,17 @@ def graph(input_file, output_file, invoke_counter, label, caption):
     command = 'dot -q2 -Tpng -o "{0}" "{1}"'.format(
             image_file, input_file)
     os.system(command)
+    data = os.popen('identify {0}'.format(image_file)).read()
+    print('DATA:', data)
+    dimensions = data.split()[2].split('x')
     with open(output_file, 'w') as fout:
         env = utils.Environment('figure', ('H', True))
         env.append('\\centering\n')
-        env.append('\\includegraphics[scale=0.7]{{{0}}}\n', image_file)
+        if int(dimensions[1]) > 1500:
+            env.append('\\includegraphics[height=\\textheight]{{{0}}}\n',
+                    image_file)
+        else:
+            env.append('\\includegraphics[scale=0.7]{{{0}}}\n', image_file)
         env.append('\\caption{{{0}}}\n'.format(caption))
         env.append('\\label{{{0}}}\n'.format(label))
         fout.write(str(env))
@@ -108,7 +115,7 @@ def forward_chaining(input_file, output_file, invoke_counter):
             solve(input_file, fout, solver, invoke_counter)
 
 
-def backward_chaining(fin, fout, input_file, output_file, invoke_counter):
+def backward_chaining(input_file, output_file, invoke_counter):
     """ Tries to solve production system, by using backward chaining.
     """
     with open(input_file) as fin:
