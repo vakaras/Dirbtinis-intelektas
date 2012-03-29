@@ -52,3 +52,12 @@ class EnumerateEnvironment(Environment):
         """
         super(EnumerateEnvironment, self).append(
                 '\n\n\\item ' + frmt, *args, **kwargs)
+
+
+class MintedEnvironment(Environment):
+    """ Pagalbinė klasė LaTeX minted aplinkų kūrimui.
+    """
+
+    def __init__(self, language):
+        super(MintedEnvironment, self).__init__(
+                'minted', ('linenos,texcl', True), (language, False))

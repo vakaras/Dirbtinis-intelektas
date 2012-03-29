@@ -54,8 +54,7 @@ def show_source(input_file, output_file):
     """ Shows information about object defined in input file.
     """
     expression = open(input_file).read().strip()
-    env = utils.Environment('minted',
-            ('linenos,texcl', True), ('python', False))
+    env = utils.MintedEnvironment('python')
     env.append(inspect.getsource(eval(expression)))
     with open(output_file, 'w') as fout:
         fout.write('Objekto \\verb|{0}| kodas:'.format(expression))
@@ -80,10 +79,22 @@ def show_structure(input_file, output_file):
         fp.write(str(env))
 
 
-def solve(solver, invoke_counter):
+def solve(input_file, fout, solver, invoke_counter):
     """ Tries to solve production system, by using solver.
     """
+
+    env = utils.MintedEnvironment('text')
+    env.append(open(input_file).read())
+    fout.write('\n\n\\subsubsection{{Pradinių duomenų failo turinys}}\n\n')
+    fout.write(str(env))
+    fout.write('\n\n')
+
+    fout.write('\n\n\\subsubsection{{Programos pradinių '
+               'duomenų interpretacija}}\n\n')
     solver.print_input()
+    solver.save_raw_input('dist/input.{0}.txt'.format(invoke_counter))
+
+    fout.write('\n\n\\subsubsection{{Programos išvestis}}\n\n')
     solver.solve()
     solver.print_graph(invoke_counter)
 
@@ -94,16 +105,16 @@ def forward_chaining(input_file, output_file, invoke_counter):
     with open(input_file) as fin:
         with open(output_file, 'w') as fout:
             solver = forwardchaining.ForwardChaining(fin, fout)
-            solve(solver, invoke_counter)
+            solve(input_file, fout, solver, invoke_counter)
 
 
-def backward_chaining(input_file, output_file, invoke_counter):
+def backward_chaining(fin, fout, input_file, output_file, invoke_counter):
     """ Tries to solve production system, by using backward chaining.
     """
     with open(input_file) as fin:
         with open(output_file, 'w') as fout:
             solver = backwardchaining.BackwardChaining(fin, fout)
-            solve(solver, invoke_counter)
+            solve(input_file, fout, solver, invoke_counter)
 
 
 if __name__ == '__main__':
