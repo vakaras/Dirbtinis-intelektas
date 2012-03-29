@@ -68,7 +68,6 @@ class ProductionSystem:
 
         rules = list()
         for line in lines:
-            print(line)
             rule = Rule.from_string_new(line)
             if rule is None:
                 if rules:
@@ -80,7 +79,6 @@ class ProductionSystem:
             raise Exception('Nepavyko nuskaityti duomenų: failo pabaiga.')
 
         for line in lines:
-            print(line)
             if line.startswith('2. '):
                 continue
             facts = utils.uncomment(line)
@@ -90,7 +88,6 @@ class ProductionSystem:
             raise Exception('Nepavyko nuskaityti duomenų: failo pabaiga.')
 
         for line in lines:
-            print(line)
             if line.startswith('3. '):
                 continue
             goal = utils.uncomment(line)
