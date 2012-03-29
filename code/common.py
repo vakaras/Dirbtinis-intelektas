@@ -28,6 +28,18 @@ class Rule:
         else:
             return Rule(string[-1], string[0:-1])
 
+    @classmethod
+    def from_string_new(self, string):
+        """ Sukuria taisyklės objektą iš simbolių eilutės.
+        """
+        for i in range(1, 4):
+            if string.startswith('{0}. '.format(i)):
+                return None
+        string = utils.uncomment(string)
+        if len(string) < 2:
+            return None
+        else:
+            return Rule(string[0], string[1:])
 
 class ProductionSystem:
     """ Produkcijų sistema. (Trejetas <R, F, G>.)
@@ -40,6 +52,61 @@ class ProductionSystem:
 
     @classmethod
     def from_file(self, file):
+        """ Sukuria produkcijų sistemos objektą iš failo tipo objekto.
+        """
+        file.readline()                 # Skip empty line.
+        if file.readline().startswith('# Vytauto Astrausko failas.'):
+            return self.from_file_new(file)
+        else:
+            return self.from_file_old(file)
+
+    @classmethod
+    def from_file_new(self, file):
+        """ Sukuria produkcijų sistemos objektą iš failo tipo objekto.
+        """
+        lines = iter(file)
+
+        rules = list()
+        for line in lines:
+            print(line)
+            rule = Rule.from_string_new(line)
+            if rule is None:
+                if rules:
+                    break
+            else:
+                rules.append(rule)
+                rule.index = 'R{0}'.format(len(rules))
+        else:
+            raise Exception('Nepavyko nuskaityti duomenų: failo pabaiga.')
+
+        for line in lines:
+            print(line)
+            if line.startswith('2. '):
+                continue
+            facts = utils.uncomment(line)
+            if facts:
+                break
+        else:
+            raise Exception('Nepavyko nuskaityti duomenų: failo pabaiga.')
+
+        for line in lines:
+            print(line)
+            if line.startswith('3. '):
+                continue
+            goal = utils.uncomment(line)
+            if goal:
+                if len(goal) == 1:
+                    break
+                else:
+                    raise Exception(
+                            'Nepavyko nuskaityti duomenų: blogas tikslas.')
+        else:
+            raise Exception('Nepavyko nuskaityti duomenų: failo pabaiga.')
+
+        return ProductionSystem(rules, set(facts), goal)
+
+    @classmethod
+    def from_file_old(self, file):
         """ Sukuria produkcijų sistemos objektą iš failo tipo objekto.
         """
         lines = iter(file)
