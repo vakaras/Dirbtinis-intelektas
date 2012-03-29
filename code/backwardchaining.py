@@ -70,9 +70,10 @@ class BackwardChaining(Solver):
         if self.solution is not None:
             self.file.write('\n\nAtsakymas: ')
             if self.solution:
-                self.file.write(utils.math(
-                    ', '.join(rule.index for rule in self.solution)
-                    ))
+                self.file.write(
+                    ', '.join(
+                        utils.math(rule.index)
+                        for rule in self.solution))
             else:
                 self.file.write(utils.math('\\emptyset'))
         else:
