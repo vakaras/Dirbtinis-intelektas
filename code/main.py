@@ -40,9 +40,9 @@ def graph(input_file, output_file, invoke_counter, label, caption):
     image_file = 'dist/document-graph-{0}.png'.format(invoke_counter)
     command = 'dot -q2 -Tpng -o "{0}" "{1}"'.format(
             image_file, input_file)
-    os.system(command)
+    if os.system(command) != 0:
+        raise Exception('Command failed: {0}.'.format(command))
     data = os.popen('identify {0}'.format(image_file)).read()
-    print('DATA:', data)
     dimensions = data.split()[2].split('x')
     with open(output_file, 'w') as fout:
         env = utils.Environment('figure', ('H', True))
@@ -99,7 +99,7 @@ def solve(input_file, fout, solver, invoke_counter):
     fout.write('\n\n\\subsubsection{{Programos pradinių '
                'duomenų interpretacija}}\n\n')
     solver.print_input()
-    solver.save_raw_input('dist/input.{0}.txt'.format(invoke_counter))
+    #solver.save_raw_input('dist/input.{0}.txt'.format(invoke_counter))
 
     fout.write('\n\n\\subsubsection{{Programos išvestis}}\n\n')
     solver.solve()
