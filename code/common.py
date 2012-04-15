@@ -153,10 +153,11 @@ class Solver:
     """ Bazinė klasė atsakinga už produkcijų išvedimą.
     """
 
-    def __init__(self, fin, fout):
+    def __init__(self, fin, fout, invoke_counter):
         self.production_system = ProductionSystem.from_file(fin)
         self.file = fout
         self.solution = []
+        self.invoke_counter = invoke_counter
 
     def print_input(self):
         """ Į rezultatų failą išveda gautus pradinius duomenis.

@@ -111,7 +111,8 @@ def forward_chaining(input_file, output_file, invoke_counter):
     """
     with open(input_file) as fin:
         with open(output_file, 'w') as fout:
-            solver = forwardchaining.ForwardChaining(fin, fout)
+            solver = forwardchaining.ForwardChaining(
+                    fin, fout, invoke_counter)
             solve(input_file, fout, solver, invoke_counter)
 
 
@@ -120,7 +121,8 @@ def backward_chaining(input_file, output_file, invoke_counter):
     """
     with open(input_file) as fin:
         with open(output_file, 'w') as fout:
-            solver = backwardchaining.BackwardChaining(fin, fout)
+            solver = backwardchaining.BackwardChaining(
+                    fin, fout, invoke_counter)
             solve(input_file, fout, solver, invoke_counter)
 
 
