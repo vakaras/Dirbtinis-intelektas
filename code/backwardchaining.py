@@ -130,7 +130,9 @@ class BackwardChaining(Solver):
         env = utils.Environment('pythonaienv',
                 ('graph|{0}|Semantinis grafas.'.format(label), True))
         self.graph = env
-        env.append('digraph G {\n')
+        env.append(
+                'digraph G {{ // graph-invoke-bc-solve-1: {0} \n',
+                self.invoke_counter)
         env.append('edge [arrowsize="1.5"];\n')
 
         self.trace = utils.EnumerateEnvironment()
@@ -159,4 +161,43 @@ class BackwardChaining(Solver):
         self.file.write((
             '\n\nSemantinis grafas pateiktas \\ref{{{0}}} '
             'paveikslėlyje.\n').format(label))
+        self.file.write(str(env) + '\n\n')
+
+        return
+        if int(self.invoke_counter) == 26:
+            return
+        label = 'graph:{0}'.format(int(self.invoke_counter) + 200)
+        env = utils.Environment('pythonaienv',
+                ('graph|{0}|Grafas.'.format(label), True))
+        env.append(
+                'digraph G {{ // graph-invoke-bc-solve-2: {0} \n',
+                self.invoke_counter)
+        env.append('node [fixedsize="true", fontsize=8, '
+                   'width="0.2cm", height="0.2cm"];\n')
+        env.append('edge [arrowsize="1.5", fontsize=8];\n')
+        node = 'node [shape="{0}"]; {1}; \n'
+        edge = 'edge [arrowsize="0.7", label="{0}"]; {1} -> {2}; \n'
+        edge_solution = (
+            'edge [arrowsize="1.5", label="{0}"]; {1} -> {2}; \n')
+        rules = set()
+        facts = set()
+        edges = set()
+        def add_fact(fact):
+            if fact not in facts:
+                env.append(node, 'box', fact)
+                facts.add(fact)
+        def add_edge(a, b, rule):
+            if (a, b) not in edges:
+                if rule in self.solution:
+                    env.append(edge_solution, rule.index, a, b)
+                else:
+                    env.append(edge, rule.index, a, b)
+                edges.add((a, b))
+        for fact in self.production_system.facts:
+            add_fact(fact)
+        for rule in self.production_system.rules:
+            for fact in rule.premises:
+                add_fact(fact)
+                add_edge(fact, rule.result, rule)
+        env.append('}\n')
         self.file.write(str(env))

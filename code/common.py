@@ -191,7 +191,9 @@ class Solver:
         label = 'graph:{0}'.format(invoke_counter)
         env = utils.Environment('pythonaienv',
                 ('graph|{0}|Semantinis grafas.'.format(label), True))
-        env.append('digraph G {\n')
+        env.append(
+                'digraph G {{ // graph-invoke-print-graph: {0} \n',
+                self.invoke_counter)
         env.append('node [fixedsize="true", fontsize=11, '
                    'width="0.3cm", height="0.3cm"];\n')
         env.append('edge [arrowsize="1.5"];\n')

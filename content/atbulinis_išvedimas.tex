@@ -328,3 +328,95 @@ s
 3. Tikslas.
 F
 \end{pythonaienv}
+
+\subsection{Labirintą atitinkantis grafas su sprendimu}
+
+\begin{pythonaienv}[graph|graph:228|Grafas.]
+digraph G { // graph-invoke-bc-solve-2: 28 
+node [fixedsize="true", fontsize=8, width="0.2cm", height="0.2cm"];
+edge [arrowsize="1.5", fontsize=8];
+node [shape="box"]; s; 
+node [shape="box"]; t; 
+edge [arrowsize="1.5", label="R1"]; t -> F; 
+node [shape="box"]; y; 
+edge [arrowsize="0.7", label="R2"]; y -> F; 
+edge [arrowsize="1.5", label="R3"]; s -> d; 
+node [shape="box"]; d; 
+edge [arrowsize="0.7", label="R4"]; d -> s; 
+edge [arrowsize="0.7", label="R5"]; s -> a; 
+node [shape="box"]; a; 
+edge [arrowsize="0.7", label="R6"]; a -> s; 
+edge [arrowsize="0.7", label="R7"]; s -> b; 
+node [shape="box"]; b; 
+edge [arrowsize="0.7", label="R8"]; b -> s; 
+edge [arrowsize="0.7", label="R9"]; s -> c; 
+node [shape="box"]; c; 
+edge [arrowsize="0.7", label="R10"]; c -> s; 
+edge [arrowsize="1.5", label="R11"]; d -> v; 
+node [shape="box"]; v; 
+edge [arrowsize="0.7", label="R12"]; v -> d; 
+edge [arrowsize="0.7", label="R13"]; v -> y; 
+edge [arrowsize="0.7", label="R14"]; y -> v; 
+edge [arrowsize="1.5", label="R15"]; v -> w; 
+node [shape="box"]; w; 
+edge [arrowsize="0.7", label="R16"]; w -> v; 
+edge [arrowsize="0.7", label="R17"]; v -> x; 
+node [shape="box"]; x; 
+edge [arrowsize="0.7", label="R18"]; x -> v; 
+node [shape="box"]; z; 
+edge [arrowsize="0.7", label="R19"]; z -> w; 
+edge [arrowsize="1.5", label="R20"]; w -> z; 
+edge [arrowsize="1.5", label="R21"]; z -> t; 
+edge [arrowsize="0.7", label="R22"]; t -> z; 
+edge [arrowsize="0.7", label="R23"]; a -> e; 
+node [shape="box"]; e; 
+edge [arrowsize="0.7", label="R24"]; e -> a; 
+edge [arrowsize="0.7", label="R25"]; e -> f; 
+node [shape="box"]; f; 
+edge [arrowsize="0.7", label="R26"]; f -> e; 
+edge [arrowsize="0.7", label="R27"]; f -> g; 
+node [shape="box"]; g; 
+edge [arrowsize="0.7", label="R28"]; g -> f; 
+edge [arrowsize="0.7", label="R29"]; g -> h; 
+node [shape="box"]; h; 
+edge [arrowsize="0.7", label="R30"]; h -> g; 
+edge [arrowsize="0.7", label="R31"]; h -> i; 
+node [shape="box"]; i; 
+edge [arrowsize="0.7", label="R32"]; i -> h; 
+edge [arrowsize="0.7", label="R33"]; h -> j; 
+node [shape="box"]; j; 
+edge [arrowsize="0.7", label="R34"]; j -> h; 
+edge [arrowsize="0.7", label="R35"]; i -> k; 
+node [shape="box"]; k; 
+edge [arrowsize="0.7", label="R36"]; k -> i; 
+edge [arrowsize="0.7", label="R37"]; k -> l; 
+node [shape="box"]; l; 
+edge [arrowsize="0.7", label="R38"]; l -> k; 
+edge [arrowsize="0.7", label="R39"]; l -> m; 
+node [shape="box"]; m; 
+edge [arrowsize="0.7", label="R40"]; m -> l; 
+edge [arrowsize="0.7", label="R41"]; m -> o; 
+node [shape="box"]; o; 
+edge [arrowsize="0.7", label="R42"]; o -> m; 
+edge [arrowsize="0.7", label="R43"]; m -> n; 
+node [shape="box"]; n; 
+edge [arrowsize="0.7", label="R44"]; n -> m; 
+edge [arrowsize="0.7", label="R45"]; o -> q; 
+node [shape="box"]; q; 
+edge [arrowsize="0.7", label="R46"]; q -> o; 
+edge [arrowsize="0.7", label="R47"]; q -> r; 
+node [shape="box"]; r; 
+edge [arrowsize="0.7", label="R48"]; r -> q; 
+edge [arrowsize="0.7", label="R49"]; q -> j; 
+edge [arrowsize="0.7", label="R50"]; j -> q; 
+edge [arrowsize="0.7", label="R51"]; r -> b; 
+edge [arrowsize="0.7", label="R52"]; b -> r; 
+edge [arrowsize="0.7", label="R53"]; n -> p; 
+node [shape="box"]; p; 
+edge [arrowsize="0.7", label="R54"]; p -> n; 
+edge [arrowsize="0.7", label="R55"]; c -> u; 
+node [shape="box"]; u; 
+edge [arrowsize="0.7", label="R56"]; u -> c; 
+}
+
+\end{pythonaienv}
