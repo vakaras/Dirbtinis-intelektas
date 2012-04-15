@@ -65,7 +65,7 @@ class BackwardChaining(Solver):
                                         # \ref{bc:pseudo:add_fact}
                     return solution     # \ref{bc:pseudo:return_succ}
         self.trace.append(
-                '{1} Tikslas {0}. Fakto išvesti neįmanoma.', goal, space)
+                '{1} Tikslas {0}. Tikslo išvesti neįmanoma.', goal, space)
         if not tried:
             self.add_text("neišvedamas")
             self.add_edge(self.last_text_id, goal_id)
