@@ -11,6 +11,9 @@ class ForwardChaining(Solver):
     def run(self, rules, facts, goal):
         """ Ieško tikslo naudodama tiesioginį išvedimą.
         """
+        if goal in facts:   # \ref{fc:pseudo:while_condition}
+            self.trace.append('Rąstas tikslas.')
+            return True
         were_used = True
         while were_used:                # \ref{fc:pseudo:while_condition}
             were_used = False
