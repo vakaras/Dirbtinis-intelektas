@@ -72,220 +72,259 @@ skyrelyje, realizacija:
 \subsection{Pirmasis pavyzdys: paprastas atvejis}
 
 \begin{pythonaienv}[bc]
-# Taisyklės:
-FB Z                                    # R1: F, B → Z
-CD F                                    # R2: C, D → F
-A D                                     # R3: A → D
-# Faktai:
-ABC
-# Tikslas:
+# Vytauto Astrausko failas.
+1. Taisyklės.
+ZFB                                     # R1: F, B → Z
+FCD                                     # R2: C, D → F
+DA                                      # R3: A → D
+
+2. Faktai.
+ACB
+
+3. Tikslas.
 Z
 \end{pythonaienv}
 
 \subsection{Antrasis pavyzdys: du išvedimo keliai}
 
 \begin{pythonaienv}[bc]
-# Taisyklės:
-D Z                                     # R1: D → Z
-C D                                     # R2: C → D
-B C                                     # R3: B → C
-A G                                     # R4: A → G
-G Z                                     # R5: G → Z
-A B                                     # R6: A → B
-# Faktai:
+# Vytauto Astrausko failas.
+1. Taisyklės.
+ZD                                      # R1: D → Z
+DC                                      # R2: C → D
+CB                                      # R3: B → C
+GA                                      # R4: A → G
+ZG                                      # R5: G → Z
+BA                                      # R6: A → B
+
+2. Faktai.
 A
-# Tikslas:
+
+3. Tikslas.
 Z
 \end{pythonaienv}
 
 \subsection{Trečiasis pavyzdys: du išvedimo keliai (taisyklės kita tvarka)}
 
 \begin{pythonaienv}[bc]
-# Taisyklės:
-A G                                     # R1: A → G
-D Z                                     # R2: D → Z
-C D                                     # R3: C → D
-B C                                     # R4: B → C
-A B                                     # R5: A → B
-G Z                                     # R6: G → Z
-# Faktai:
+# Vytauto Astrausko failas.
+1. Taisyklės.
+GA                                      # R1: A → G
+ZD                                      # R2: D → Z
+DC                                      # R3: C → D
+CB                                      # R4: B → C
+BA                                      # R5: A → B
+ZG                                      # R6: G → Z
+
+2. Faktai.
 A
-# Tikslas:
+
+3. Tikslas.
 Z
 \end{pythonaienv}
 
 \subsection{Ketvirtasis pavyzdys: klaidinančios taisyklės}
 
 \begin{pythonaienv}[bc]
-# Taisyklės:
-Z Z                                     # R1:  Z → Z
-VA Z                                    # R2:  V, A → Z
-VAZ Z                                   # R3:  V, A, Z → Z
-ABCDEFGHIJKLMNOPRST Z                   # R4:  … → Z
-FB Z                                    # R5:  F, B → Z
-CD F                                    # R6:  C, D → F
-A D                                     # R7:  A → D
-A L                                     # R8:  A → L
-L K                                     # R9:  L → K
-B A                                     # R10: B → A
-D M                                     # R11: D → M
-# Faktai:
-ABC
-# Tikslas:
+# Vytauto Astrausko failas.
+1. Taisyklės.
+ZZ                                      # R1: Z → Z
+ZVA                                     # R2: V, A → Z
+ZVAZ                                    # R3: V, A, Z → Z
+ZABCDEFGHIJKLMNOPRST                    # R4: A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, R, S, T → Z
+ZFB                                     # R5: F, B → Z
+FCD                                     # R6: C, D → F
+DA                                      # R7: A → D
+LA                                      # R8: A → L
+KL                                      # R9: L → K
+AB                                      # R10: B → A
+MD                                      # R11: D → M
+
+2. Faktai.
+ACB
+
+3. Tikslas.
 Z
 \end{pythonaienv}
 
 \subsection{Penktasis pavyzdys: ilgas antecedentas}
 
 \begin{pythonaienv}[bc]
-# Taisyklės:
-G Z                                     # R1: G → Z
-A G                                     # R2: A → G
-A B                                     # R3: A → B
-B C                                     # R4: B → C
-C D                                     # R5: C → D
-D Z                                     # R6: D → Z
-ABGCDZ H                                # R7: A, B, C, D, G, Z → H
-# Faktai:
+# Vytauto Astrausko failas.
+1. Taisyklės.
+ZG                                      # R1: G → Z
+GA                                      # R2: A → G
+BA                                      # R3: A → B
+CB                                      # R4: B → C
+DC                                      # R5: C → D
+ZD                                      # R6: D → Z
+HABGCDZ                                 # R7: A, B, G, C, D, Z → H
+
+2. Faktai.
 A
-# Tikslas:
+
+3. Tikslas.
 H
 \end{pythonaienv}
 
 \subsection{Šeštasis pavyzdys: išvedimas neegzistuoja}
 
 \begin{pythonaienv}[bc]
-# Taisyklės:
-CD F                                    # R1: C, D → F
-A D                                     # R2: A → D
-A L                                     # R3: A → L
-L K                                     # R4: L → K
-B A                                     # R5: B → A
-D M                                     # R6: D → M
-FB Z                                    # R7: F, B → Z
-# Faktai:
-ABC
-# Tikslas:
+# Vytauto Astrausko failas.
+1. Taisyklės.
+FCD                                     # R1: C, D → F
+DA                                      # R2: A → D
+LA                                      # R3: A → L
+KL                                      # R4: L → K
+AB                                      # R5: B → A
+MD                                      # R6: D → M
+ZFB                                     # R7: F, B → Z
+
+2. Faktai.
+ACB
+
+3. Tikslas.
 H
 \end{pythonaienv}
 
 \subsection{Septintasis pavyzdys: tikslas tarp prielaidų}
 
 \begin{pythonaienv}[bc]
-# Taisyklės:
-CD F                                    # R1: C, D → F
-A D                                     # R2: A → D
-A L                                     # R3: A → L
-L K                                     # R4: L → K
-B A                                     # R5: B → A
-D M                                     # R6: D → M
-FB Z                                    # R7: F, B → Z
-# Faktai:
-ABC
-# Tikslas:
+# Vytauto Astrausko failas.
+1. Taisyklės.
+FCD                                     # R1: C, D → F
+DA                                      # R2: A → D
+LA                                      # R3: A → L
+KL                                      # R4: L → K
+AB                                      # R5: B → A
+MD                                      # R6: D → M
+ZFB                                     # R7: F, B → Z
+
+2. Faktai.
+ACB
+
+3. Tikslas.
 B
 \end{pythonaienv}
 
 \subsection{Aštuntasis pavyzdys: devynių produkcijų DC}
 
 \begin{pythonaienv}[bc]
-# Taisyklės:
-DC Z
-C D
-B C
-A B
-D A
-T D
-G A
-H B
-J C
-# Faktai:
+# Vytauto Astrausko failas.
+1. Taisyklės.
+ZDC                                     # R1: D, C → Z
+DC                                      # R2: C → D
+CB                                      # R3: B → C
+BA                                      # R4: A → B
+AD                                      # R5: D → A
+DT                                      # R6: T → D
+AG                                      # R7: G → A
+BH                                      # R8: H → B
+CJ                                      # R9: J → C
+
+2. Faktai.
 T
-# Tikslas:
+
+3. Tikslas.
 Z
 \end{pythonaienv}
 
 \subsection{Devintasis pavyzdys: devynių produkcijų CD}
 
 \begin{pythonaienv}[bc]
-# Taisyklės:
-CD Z
-C D
-B C
-A B
-D A
-T D
-G A
-H B
-J C
-# Faktai:
+# Vytauto Astrausko failas.
+1. Taisyklės.
+ZCD                                     # R1: C, D → Z
+DC                                      # R2: C → D
+CB                                      # R3: B → C
+BA                                      # R4: A → B
+AD                                      # R5: D → A
+DT                                      # R6: T → D
+AG                                      # R7: G → A
+BH                                      # R8: H → B
+CJ                                      # R9: J → C
+
+2. Faktai.
 T
-# Tikslas:
+
+3. Tikslas.
 Z
 \end{pythonaienv}
 
 \subsection{Dešimtasis pavyzdys: labirintas}
 
+\subsubsection{Labirinto žemėlapis}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[]{content/map.png}
+  \caption{Labirinto žemėlapis}
+  \label{fig:fc:map}
+\end{figure}
+
 \begin{pythonaienv}[bc]
-# Taisyklės:
-tŠ             # R1: t → @
-yŠ             # R2: y → @
-sd             # R3: s → d
-ds             # R4: d → s
-sa             # R5: s → a
-as             # R6: a → s
-sb             # R7: s → b
-bs             # R8: b → s
-sc             # R9: s → c
-cs             # R10: c → s
-dv             # R11: d → v
-vd             # R12: v → d
-vy             # R13: v → y
-yv             # R14: y → v
-vw             # R15: v → w
-wv             # R16: w → v
-vx             # R17: v → x
-xv             # R18: x → v
-zw             # R19: z → w
-wz             # R20: w → z
-zt             # R21: z → t
-tz             # R22: t → z
-ae             # R23: a → e
-ea             # R24: e → a
-ef             # R25: e → f
-fe             # R26: f → e
-fg             # R27: f → g
-gf             # R28: g → f
-gh             # R29: g → h
-hg             # R30: h → g
-hi             # R31: h → i
-ih             # R32: i → h
-hj             # R33: h → j
-jh             # R34: j → h
-ik             # R35: i → k
-ki             # R36: k → i
-kl             # R37: k → l
-lk             # R38: l → k
-lm             # R39: l → m
-ml             # R40: m → l
-mo             # R41: m → o
-om             # R42: o → m
-mn             # R43: m → n
-nm             # R44: n → m
-oq             # R45: o → q
-qo             # R46: q → o
-qr             # R47: q → r
-rq             # R48: r → q
-qj             # R49: q → j
-jq             # R50: j → q
-rb             # R51: r → b
-br             # R52: b → r
-np             # R53: n → p
-pn             # R54: p → n
-cu             # R55: c → u
-uc             # R56: u → c
-# Faktai:
+# Vytauto Astrausko failas.
+1. Taisyklės.
+Ft                                      # R1: t → F
+Fy                                      # R2: y → F
+ds                                      # R3: s → d
+sd                                      # R4: d → s
+as                                      # R5: s → a
+sa                                      # R6: a → s
+bs                                      # R7: s → b
+sb                                      # R8: b → s
+cs                                      # R9: s → c
+sc                                      # R10: c → s
+vd                                      # R11: d → v
+dv                                      # R12: v → d
+yv                                      # R13: v → y
+vy                                      # R14: y → v
+wv                                      # R15: v → w
+vw                                      # R16: w → v
+xv                                      # R17: v → x
+vx                                      # R18: x → v
+wz                                      # R19: z → w
+zw                                      # R20: w → z
+tz                                      # R21: z → t
+zt                                      # R22: t → z
+ea                                      # R23: a → e
+ae                                      # R24: e → a
+fe                                      # R25: e → f
+ef                                      # R26: f → e
+gf                                      # R27: f → g
+fg                                      # R28: g → f
+hg                                      # R29: g → h
+gh                                      # R30: h → g
+ih                                      # R31: h → i
+hi                                      # R32: i → h
+jh                                      # R33: h → j
+hj                                      # R34: j → h
+ki                                      # R35: i → k
+ik                                      # R36: k → i
+lk                                      # R37: k → l
+kl                                      # R38: l → k
+ml                                      # R39: l → m
+lm                                      # R40: m → l
+om                                      # R41: m → o
+mo                                      # R42: o → m
+nm                                      # R43: m → n
+mn                                      # R44: n → m
+qo                                      # R45: o → q
+oq                                      # R46: q → o
+rq                                      # R47: q → r
+qr                                      # R48: r → q
+jq                                      # R49: q → j
+qj                                      # R50: j → q
+br                                      # R51: r → b
+rb                                      # R52: b → r
+pn                                      # R53: n → p
+np                                      # R54: p → n
+uc                                      # R55: c → u
+cu                                      # R56: u → c
+
+2. Faktai.
 s
-# Tikslas:
-Š
+
+3. Tikslas.
+F
 \end{pythonaienv}
