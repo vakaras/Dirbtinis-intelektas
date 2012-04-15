@@ -73,100 +73,118 @@ Z
 \subsection{Antrasis pavyzdys: du išvedimo keliai}
 
 \begin{pythonaienv}[fc]
-# Taisyklės:
-D Z                                     # R1: D → Z
-C D                                     # R2: C → D
-B C                                     # R3: B → C
-A G                                     # R4: A → G
-G Z                                     # R5: G → Z
-A B                                     # R6: A → B
-# Faktai:
+# Vytauto Astrausko failas.
+1. Taisyklės.
+ZD                                      # R1: D → Z
+DC                                      # R2: C → D
+CB                                      # R3: B → C
+GA                                      # R4: A → G
+ZG                                      # R5: G → Z
+BA                                      # R6: A → B
+
+2. Faktai.
 A
-# Tikslas:
+
+3. Tikslas.
 Z
 \end{pythonaienv}
 
 \subsection{Trečiasis pavyzdys: du išvedimo keliai (taisyklės kita tvarka)}
 
 \begin{pythonaienv}[fc]
-# Taisyklės:
-A G                                     # R1: A → G
-D Z                                     # R2: D → Z
-C D                                     # R3: C → D
-B C                                     # R4: B → C
-A B                                     # R5: A → B
-G Z                                     # R6: G → Z
-# Faktai:
+# Vytauto Astrausko failas.
+1. Taisyklės.
+GA                                      # R1: A → G
+ZD                                      # R2: D → Z
+DC                                      # R3: C → D
+CB                                      # R4: B → C
+BA                                      # R5: A → B
+ZG                                      # R6: G → Z
+
+2. Faktai.
 A
-# Tikslas:
+
+3. Tikslas.
 Z
 \end{pythonaienv}
 
 \subsection{Ketvirtasis pavyzdys: didesnis testas}
 
 \begin{pythonaienv}[fc]
-# Taisyklės:
-FB Z                                    # R1: F, B → Z
-CD F                                    # R2: C, D → F
-A D                                     # R3: A → D
-A L                                     # R4: A → L
-L K                                     # R5: L → K
-B A                                     # R6: B → A
-D M                                     # R7: D → M
-# Faktai:
-ABC
-# Tikslas:
+# Vytauto Astrausko failas.
+1. Taisyklės.
+ZFB                                     # R1: F, B → Z
+FCD                                     # R2: C, D → F
+DA                                      # R3: A → D
+LA                                      # R4: A → L
+KL                                      # R5: L → K
+AB                                      # R6: B → A
+MD                                      # R7: D → M
+
+2. Faktai.
+ACB
+
+3. Tikslas.
 Z
 \end{pythonaienv}
 
 \subsection{Penktasis pavyzdys: ilgas antecedentas}
 
 \begin{pythonaienv}[fc]
-# Taisyklės:
-G Z                                     # R1: G → Z
-A G                                     # R2: A → G
-A B                                     # R3: A → B
-B C                                     # R4: B → C
-C D                                     # R5: C → D
-D Z                                     # R6: D → Z
-ABGCDZ H                                # R7: A, B, C, D, G, Z → H
-# Faktai:
+# Vytauto Astrausko failas.
+1. Taisyklės.
+ZG                                      # R1: G → Z
+GA                                      # R2: A → G
+BA                                      # R3: A → B
+CB                                      # R4: B → C
+DC                                      # R5: C → D
+ZD                                      # R6: D → Z
+HABGCDZ                                 # R7: A, B, G, C, D, Z → H
+
+2. Faktai.
 A
-# Tikslas:
+
+3. Tikslas.
 H
 \end{pythonaienv}
 
 \subsection{Šeštasis pavyzdys: išvedimas neegzistuoja}
 
 \begin{pythonaienv}[fc]
-# Taisyklės:
-CD F                                    # R1: C, D → F
-A D                                     # R2: A → D
-A L                                     # R3: A → L
-L K                                     # R4: L → K
-B A                                     # R5: B → A
-D M                                     # R6: D → M
-FB Z                                    # R7: F, B → Z
-# Faktai:
-ABC
-# Tikslas:
+# Vytauto Astrausko failas.
+1. Taisyklės.
+FCD                                     # R1: C, D → F
+DA                                      # R2: A → D
+LA                                      # R3: A → L
+KL                                      # R4: L → K
+AB                                      # R5: B → A
+MD                                      # R6: D → M
+ZFB                                     # R7: F, B → Z
+
+2. Faktai.
+ACB
+
+3. Tikslas.
 H
 \end{pythonaienv}
 
 \subsection{Septintasis pavyzdys: tikslas tarp prielaidų}
 
 \begin{pythonaienv}[fc]
-# Taisyklės:
-CD F                                    # R1: C, D → F
-A D                                     # R2: A → D
-A L                                     # R3: A → L
-L K                                     # R4: L → K
-B A                                     # R5: B → A
-D M                                     # R6: D → M
-FB Z                                    # R7: F, B → Z
-# Faktai:
-ABC
-# Tikslas:
+# Vytauto Astrausko failas.
+1. Taisyklės.
+FCD                                     # R1: C, D → F
+DA                                      # R2: A → D
+LA                                      # R3: A → L
+KL                                      # R4: L → K
+AB                                      # R5: B → A
+MD                                      # R6: D → M
+ZFB                                     # R7: F, B → Z
+
+2. Faktai.
+ACB
+
+3. Tikslas.
 B
 \end{pythonaienv}
 
