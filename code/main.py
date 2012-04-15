@@ -103,7 +103,6 @@ def solve(input_file, fout, solver, invoke_counter):
 
     fout.write('\n\n\\subsubsection{{Programos išvestis}}\n\n')
     solver.solve()
-    solver.print_graph(invoke_counter)
 
 
 def forward_chaining(input_file, output_file, invoke_counter):
@@ -114,6 +113,7 @@ def forward_chaining(input_file, output_file, invoke_counter):
             solver = forwardchaining.ForwardChaining(
                     fin, fout, invoke_counter)
             solve(input_file, fout, solver, invoke_counter)
+            solver.print_graph(invoke_counter)
 
 
 def backward_chaining(input_file, output_file, invoke_counter):
