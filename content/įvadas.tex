@@ -58,3 +58,29 @@ informacija būtų dubliuojama.)
 \section{Klasių išskirstymas į modulius}
 
 \pythonai{structure}{}
+
+\subsection{Klasė „Rule“}
+
+\begin{minted}[linenos,texcl]{python}
+class Rule:
+    """ Išvedimo taisyklė.
+    """
+
+    def __init__(self, result, premises, index=None):
+        self.result = result
+        self.premises = list(premises)
+        self.index = index
+\end{minted}
+
+\subsection{Klasė „ProductionSystem“}
+
+\begin{minted}[linenos,texcl]{python}
+class ProductionSystem:
+    """ Produkcijų sistema. (Trejetas <R, F, G>.)
+    """
+
+    def __init__(self, rules, facts, goal):
+        self.rules = rules
+        self.facts = facts
+        self.goal = goal
+\end{minted}
